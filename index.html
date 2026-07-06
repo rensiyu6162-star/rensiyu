@@ -1885,23 +1885,20 @@ initGallery('livat', 'livatGalleryTrack', 'livatGalleryCounter');
 function handleContactForm(event) {
   event.preventDefault();
   const form = event.target;
-  const data = {
-    name: form.name.value,
-    email: form.email.value,
-    company: form.company.value,
-    message: form.message.value
-  };
-  // Simple client-side handling
-  const btn = form.querySelector('button[type="submit"]');
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '✓ 已发送';
-  btn.style.opacity = '0.7';
-  setTimeout(() => {
-    btn.innerHTML = originalText;
-    btn.style.opacity = '1';
-    form.reset();
-  }, 3000);
-  console.log('Contact form submitted:', data);
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const company = form.company.value.trim();
+  const message = form.message.value.trim();
+
+  const subject = encodeURIComponent('来自网站的联系消息' + (name ? ' - ' + name : ''));
+  const body = encodeURIComponent(
+    '姓名：' + name + '\n' +
+    '邮箱：' + email + '\n' +
+    (company ? '公司/团队：' + company + '\n' : '') +
+    '\n留言：\n' + message
+  );
+
+  window.location.href = 'mailto:17372786162@163.com?subject=' + subject + '&body=' + body;
   return false;
 }
 </script>
