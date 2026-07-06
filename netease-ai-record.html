@@ -270,8 +270,8 @@ h1{margin-top:.75rem;font-size:clamp(1.6rem,4vw,2.8rem);line-height:1.1;letter-s
           <p>分类多样性 → 信息密度 → 质量分 → 去重相似，最少 1 张最多 9 张</p>
         </div>
         <div class="pipe-node">
-          <div class="pipe-node-label">云端生成</div>
-          <p>大模型根据精选照片内容生成结构化记录文案</p>
+          <div class="pipe-node-label">云端文案生成</div>
+          <p>大模型根据精选照片的拍摄时间、地点及图片内容，生成 30–50 字第一人称生活化记录文案</p>
         </div>
       </div>
 
@@ -317,6 +317,15 @@ h1{margin-top:.75rem;font-size:clamp(1.6rem,4vw,2.8rem);line-height:1.1;letter-s
           <div class="model-row-label">相似度模型<br/><span style="font-size:.7rem;opacity:.6;font-weight:400">去重阈值</span></div>
           <div class="model-row-body">
             相似度阈值 <b>0.85</b>，超过则视为重复，仅保留质量分更高的一张。原始素材来自全族人生活相册与网络相册，覆盖所有分类，并包含大量同场景不同角度的成组照片，确保模型获得充分训练。
+          </div>
+        </div>
+
+        <div class="model-row">
+          <div class="model-row-label">云端文案生成<br/><span style="font-size:.7rem;opacity:.6;font-weight:400">Prompt 设计</span></div>
+          <div class="model-row-body">
+            <b>最终方案（极简 Prompt）：</b>输入图片 + 拍摄时间地点，提示词为「填充这是 XX 年 XX 月 XX 日，在某某地点，图片描述，生成 30–50 字的文字，记录风格日常」，直接一次生成文案，无需用户选择。<br/><br/>
+            <b>为什么不用复杂 Prompt？</b>最初设计了两阶段方案：第一阶段 AI 生成客观事实描述、事件描述、画面氛围三类共 6–7 个标签 + 1–2 个生活洞察短语，第二阶段用户选择标签后再生成最终文案（第一人称 30–50 字）。实验验证了多种场景——单张多人物、单张单人物、多张同主题、多张非同主题——模型效果符合预期，但两阶段交互链路让功能「重」了，与 AI 记录轻量低门槛的产品定位矛盾。<br/><br/>
+            <b>取舍决策：</b>用户若想自由发挥，可点击「编辑」进入发布器后通过「AI 灵感文案」功能重新写作。但考虑第一期开发成本及用户编辑意愿尚待验证，该能力推迟至第二期，待编辑率数据达标后再上线。
           </div>
         </div>
 
