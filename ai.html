@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>AI能力全景 | 任思雨</title>
+<meta name="description" content="任思雨个人AI能力与落地应用总结：AI视觉生成、AI产品实战、AI提效工具与AI业务落地思维。"/>
+<style>
+:root{--color-bg:#0d0818;--color-text:#e8e4f0;--color-text-soft:#8a80a8;--color-text-secondary:#b0a8c8;--color-border:rgba(0,240,255,.12);--color-cyan:#00f0ff;--color-magenta:#ff00aa;--color-blue:#4d8dff;--radius-sm:6px;--radius-lg:18px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--color-bg);color:var(--color-text);line-height:1.7;overflow-x:hidden}body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,240,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(176,0,255,.04) 1px,transparent 1px);background-size:48px 48px}body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 12% 10%,rgba(0,240,255,.18),transparent 28%),radial-gradient(circle at 86% 18%,rgba(77,141,255,.16),transparent 30%),radial-gradient(circle at 52% 86%,rgba(255,0,170,.10),transparent 34%)}a{color:inherit;text-decoration:none}
+.page{position:relative;z-index:1;min-height:100vh;padding:1rem 0 2.5rem}.topbar{display:flex;align-items:center;justify-content:flex-start;max-width:1200px;margin:0 auto 1rem;padding:0 clamp(1rem,4vw,4rem)}.ui-button{display:inline-flex;align-items:center;justify-content:center;gap:.42rem;border:1px solid rgba(0,240,255,.22);border-radius:var(--radius-sm);padding:.46rem .88rem;background:rgba(18,10,32,.58);color:var(--color-text);font-size:.78rem;transition:all .2s ease}.ui-button:hover{border-color:rgba(0,240,255,.42);color:var(--color-cyan);background:rgba(0,240,255,.08)}
+.content{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,4vw,4rem)}.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.2rem;align-items:end;margin-bottom:1rem}.eyebrow{display:inline-flex;align-items:center;gap:.42rem;width:max-content;border:1px solid var(--color-border);border-radius:999px;padding:.32rem .68rem;background:rgba(28,18,48,.46);color:var(--color-text-soft);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase}.eyebrow::before{content:'';width:.38rem;height:.38rem;border-radius:999px;background:var(--color-cyan);box-shadow:0 0 14px var(--color-cyan)}h1{margin-top:.85rem;font-size:clamp(1.85rem,4.2vw,3.5rem);line-height:1.05;letter-spacing:-.035em}.lead{max-width:78ch;margin-top:.9rem;color:var(--color-text-secondary);font-size:clamp(.92rem,1.08vw,1.02rem);line-height:1.78}.hero-chip{align-self:end;border:1px solid rgba(0,240,255,.24);border-radius:16px;padding:.8rem .95rem;background:linear-gradient(135deg,rgba(0,240,255,.12),rgba(77,141,255,.10));color:var(--color-cyan);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 16px 48px rgba(0,0,0,.16)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem;margin-top:1rem}.module{position:relative;overflow:hidden;border:1px solid rgba(0,240,255,.10);border-radius:22px;background:linear-gradient(135deg,rgba(18,10,32,.72),rgba(13,8,24,.48));box-shadow:inset 0 0 28px rgba(0,240,255,.025),0 18px 54px rgba(0,0,0,.18);padding:1.05rem}.module::before{content:'';position:absolute;left:1.05rem;right:1.05rem;top:0;height:1px;background:linear-gradient(90deg,var(--color-cyan),var(--color-blue),transparent);opacity:.7}.module-head{display:grid;grid-template-columns:auto 1fr;gap:.72rem;align-items:start}.num{display:grid;place-items:center;width:2rem;height:2rem;border-radius:999px;background:linear-gradient(135deg,rgba(0,240,255,.20),rgba(77,141,255,.18));color:var(--color-cyan);font-weight:800;font-size:.75rem}.module h2{font-size:clamp(1.02rem,1.5vw,1.25rem);line-height:1.35;letter-spacing:-.01em}.module-sub{margin-top:.18rem;color:var(--color-text-soft);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}.points{display:grid;gap:.56rem;margin-top:.9rem}.point{display:grid;grid-template-columns:.5rem 1fr;gap:.55rem;color:var(--color-text-secondary);font-size:.84rem;line-height:1.64}.point::before{content:'';width:.42rem;height:.42rem;margin-top:.56rem;border-radius:999px;background:var(--color-cyan);box-shadow:0 0 12px rgba(0,240,255,.42)}.highlight{margin-top:1rem;border:1px solid rgba(0,240,255,.15);border-radius:18px;background:linear-gradient(135deg,rgba(0,240,255,.10),rgba(255,0,170,.055));padding:.9rem 1rem}.highlight-title{color:var(--color-cyan);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}.highlight p{margin-top:.36rem;color:var(--color-text-secondary);font-size:.86rem;line-height:1.7}.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:1rem;align-items:center}.tool-tags{display:flex;flex-wrap:wrap;gap:.42rem;margin-top:.9rem}.tag{border:1px solid rgba(0,240,255,.18);border-radius:999px;padding:.26rem .58rem;background:rgba(0,240,255,.06);color:var(--color-cyan);font-size:.72rem}.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.52rem}.flow-step{min-height:5.8rem;border:1px solid rgba(255,255,255,.06);border-radius:16px;background:rgba(13,8,24,.38);padding:.68rem}.flow-step b{display:block;color:var(--color-cyan);font-size:.76rem}.flow-step span{display:block;margin-top:.35rem;color:var(--color-text-secondary);font-size:.75rem;line-height:1.5}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.hero-chip{width:max-content}.grid{grid-template-columns:1fr}.wide{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.page{padding-top:.8rem}.topbar,.content{padding-left:.9rem;padding-right:.9rem}.flow{grid-template-columns:1fr}.module{padding:.9rem}.point{font-size:.8rem}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <a class="ui-button" href="index.html#about-ai-entry">返回 ABOUT</a>
+  </header>
+  <main class="content">
+    <section class="hero" aria-label="AI能力全景介绍">
+      <div>
+        <span class="eyebrow">AI CAPABILITY MAP</span>
+        <h1>个人AI能力与落地应用全景</h1>
+        <p class="lead">围绕视觉生成、AI产品功能落地、AI Coding与Agent提效、业务场景挖掘四个方向，形成从创意表达、需求定义、功能上线到效率提升的完整AI产品能力闭环。</p>
+      </div>
+      <div class="hero-chip">PRODUCT x AI x DESIGN</div>
+    </section>
+
+    <section class="grid" aria-label="AI能力四大模块">
+      <article class="module">
+        <div class="module-head"><span class="num">01</span><div><h2>AI视觉生成与设计落地</h2><p class="module-sub">Prompt / Visual Style / Design Assets</p></div></div>
+        <div class="points">
+          <p class="point">熟练使用 Midjourney、可灵AI、即梦AI 等生图工具，能通过精细化 Prompt 控制视觉风格、亚文化表达、国风工艺质感与页面氛围。</p>
+          <p class="point">理解国内外模型差异：Midjourney 更适合复杂视觉与 UI 装饰画面，国内模型在传统文化、国风内容与中文语境上更具适配度。</p>
+          <p class="point">本科毕设《考工记》古籍工艺可视化项目中，提取工艺流程并批量构建 Prompt，生成一整套传统工艺插画素材。</p>
+        </div>
+      </article>
+
+      <article class="module">
+        <div class="module-head"><span class="num">02</span><div><h2>AI产品项目实战</h2><p class="module-sub">Online Feature / Model Logic / Compliance</p></div></div>
+        <div class="points">
+          <p class="point">完整参与网易 C 端 AI 相册记录项目，覆盖本地图片筛选模型、数据标注、云端声纹大模型 Prompt 调优与功能体验闭环。</p>
+          <p class="point">设计 AI 自动聚合照片逻辑：剔除劣质、隐私、重复图片，生成 1-9 张事件卡片并自动配文，实现轻量化生活记录。</p>
+          <p class="point">同步考量隐私与合规风险，区分本地/云端处理流程，设计用户授权弹窗，并在复盘中提出人像权重优化方案。</p>
+        </div>
+        <div class="highlight"><p class="highlight-title">上线结果</p><p>功能上线后对渗透率与留存产生正向提升，也沉淀了从需求定义、模型边界判断到合规上线的AI产品实战经验。</p></div>
+      </article>
+
+      <article class="module wide">
+        <div>
+          <div class="module-head"><span class="num">03</span><div><h2>AI提效工具与AI Coding实操</h2><p class="module-sub">Prototype / Agent / Workflow</p></div></div>
+          <div class="points">
+            <p class="point">日常使用 Google AI Studio、Claude 等工具快速生成可交互产品原型页面，并结合逐轮校验修复处理 AI 幻觉、逻辑断裂与元素缺失。</p>
+            <p class="point">利用内部 Skill / 自动化工具封装多语言翻译、网页自动走查等重复流程，将机械工作转化为可复用工作流，效率提升 30%+。</p>
+            <p class="point">借助大模型辅助 PRD、需求文档与信息整理，把时间释放给业务判断、方案设计与体验细节决策。</p>
+            <p class="point">独立完成《考工记》交互式可视化原型、个人作品集官网等可部署网页 Demo，并生成可访问 URL。</p>
+          </div>
+          <div class="tool-tags"><span class="tag">AI Coding</span><span class="tag">Agent Workflow</span><span class="tag">PRD Drafting</span><span class="tag">Prototype</span><span class="tag">Vibe Coding</span></div>
+        </div>
+        <div class="flow" aria-label="AI提效工作流">
+          <div class="flow-step"><b>Frame</b><span>先搭建页面与任务框架</span></div>
+          <div class="flow-step"><b>Generate</b><span>分步生成原型、文案与逻辑</span></div>
+          <div class="flow-step"><b>Review</b><span>逐轮校验幻觉、遗漏与体验问题</span></div>
+          <div class="flow-step"><b>Ship</b><span>修复后形成可访问 Demo 或复用流程</span></div>
+        </div>
+      </article>
+
+      <article class="module">
+        <div class="module-head"><span class="num">04</span><div><h2>AI业务落地思维</h2><p class="module-sub">Scenario / Value / Product Judgment</p></div></div>
+        <div class="points">
+          <p class="point">能主动在出行、营销、履约、内容记录等业务场景中挖掘 AI 落地机会，判断哪些环节适合自动化、生成式增强或 Agent 化。</p>
+          <p class="point">清楚 AI 工具边界：AI 更适合标准化、重复性与生成辅助类任务，核心业务判断、用户需求权衡与风险取舍仍由产品主导。</p>
+          <p class="point">结合交互设计专业背景，将 AI 生成内容与用户心智、页面场景、阅读路径结合，平衡效果、可用性与业务目标。</p>
+        </div>
+      </article>
+
+      <article class="module">
+        <div class="module-head"><span class="num">05</span><div><h2>持续学习与趋势跟进</h2><p class="module-sub">Agent / Vibe Coding / New Tools</p></div></div>
+        <div class="points">
+          <p class="point">持续关注 Agent、Vibe Coding、多模态生成与 AI 产品化趋势，优先把新工具转化为真实工作流，而不是停留在概念层。</p>
+          <p class="point">在产品工作中保持“先判断场景价值，再选择AI能力”的方法，避免为了使用 AI 而使用 AI。</p>
+          <p class="point">目标是把 AI 从单点工具变成产品推进的增效系统，服务于体验优化、业务数据提升与项目落地效率。</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>
+</body>
+</html>

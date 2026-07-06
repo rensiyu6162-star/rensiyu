@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>供应商账单 - 百战营销平台</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;background:#f5f6fa;color:#333;padding:24px;}
+.main-wrap{width:100%;}
+/* 筛选区域 */
+.filter-wrap{margin-bottom:16px;width:100%;}
+/* 整体内容滚动容器，筛选+按钮+表格同宽 */
+.content-scroll{overflow-x:auto;}
+.content-inner{min-width:900px;}
+
+.page-title{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:16px;}
+
+/* 新增按钮行 */
+.toolbar-add{margin-bottom:12px;}
+
+/* 筛选行：一行，不换行，撑满宽度 */
+.toolbar{display:flex;align-items:center;flex-wrap:nowrap;row-gap:10px;width:100%;}
+
+/* 每个筛选项 */
+.fi{display:inline-flex;align-items:center;flex:1;min-width:220px;padding-right:16px;}
+.toolbar>.fi:last-child{padding-right:0;}
+.fi .label{font-size:13px;color:#555;white-space:nowrap;flex-shrink:0;width:80px;text-align:right;padding-right:6px;}
+.fi .inp{flex:1;min-width:0;}
+.fi .sel-wrap{flex:1;min-width:0;overflow:hidden;}
+.fi .sel-wrap select{width:100%;}
+
+/* 日期范围 */
+.fi-date{display:inline-flex;align-items:center;flex:1;min-width:220px;padding-right:16px;}
+.fi-date .label{font-size:13px;color:#555;white-space:nowrap;flex-shrink:0;width:80px;text-align:right;padding-right:6px;}
+.date-range{flex:1;min-width:0;display:flex;align-items:center;height:32px;border:1px solid #d9d9d9;border-radius:4px;background:#fff;padding:0 8px;gap:4px;}
+.date-range:focus-within{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.08);}
+.date-range input[type=date]{border:none;outline:none;background:transparent;font-size:13px;color:#333;flex:1;min-width:0;height:100%;padding:0;}
+.date-range .sep{font-size:13px;color:#999;flex-shrink:0;}
+
+/* 查询/重置按钮行，单独一行，始终贴右 */
+.toolbar-btns{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:10px;margin-bottom:16px;width:100%;}
+
+/* 输入/select */
+.inp{height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 10px;font-size:13px;outline:none;color:#333;background:#fff;width:196px;max-width:196px;}
+.inp:focus{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.08);}
+.sel-wrap{position:relative;display:inline-block;width:196px;max-width:196px;}
+.sel-wrap select{width:196px;max-width:196px;height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 28px 0 10px;font-size:13px;outline:none;color:#333;background:#fff;appearance:none;cursor:pointer;}
+.sel-wrap select:focus{border-color:#1677ff;}
+.sel-wrap::after{content:"";position:absolute;right:10px;top:50%;transform:translateY(-50%);border:4px solid transparent;border-top:5px solid #999;pointer-events:none;}
+
+/* 按钮 */
+.btn{height:32px;padding:0 16px;border-radius:4px;border:1px solid transparent;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;white-space:nowrap;}
+.btn-primary{background:#1677ff;color:#fff;border-color:#1677ff;}
+.btn-primary:hover{background:#4096ff;}
+.btn-default{background:#fff;color:#333;border-color:#d9d9d9;}
+.btn-default:hover{color:#1677ff;border-color:#1677ff;}
+.btn-add{background:#1677ff;color:#fff;border-color:#1677ff;}
+.btn-add:hover{background:#4096ff;}
+
+/* 表格 */
+.table-card{background:#fff;border-radius:6px;border:1px solid #e8e8e8;}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:12px 16px;text-align:left;color:#555;font-weight:500;background:#fafafa;white-space:nowrap;border-bottom:1px solid #f0f0f0;}
+td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;white-space:nowrap;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#fafafa;}
+
+.status-tag{display:inline-block;padding:1px 8px;border-radius:2px;font-size:12px;}
+.status-on{background:#f6ffed;color:#52c41a;border:1px solid #b7eb8f;}
+.status-off{background:#fff7e6;color:#fa8c16;border:1px solid #ffd591;}
+
+.op-link{color:#1677ff;cursor:pointer;font-size:13px;margin-right:8px;background:none;border:none;padding:0;}
+.op-link:hover{color:#4096ff;}
+.op-link.del{color:#ff4d4f;}
+.op-link.del:hover{color:#ff7875;}
+
+/* 分页 */
+.pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:14px 16px;border-top:1px solid #f0f0f0;font-size:13px;color:#555;}
+.pager{display:flex;align-items:center;gap:4px;}
+.pager-btn{min-width:28px;height:28px;padding:0 6px;border:1px solid #d9d9d9;border-radius:4px;background:#fff;cursor:pointer;font-size:13px;color:#333;display:flex;align-items:center;justify-content:center;}
+.pager-btn:hover{border-color:#1677ff;color:#1677ff;}
+.pager-btn.active{background:#1677ff;color:#fff;border-color:#1677ff;}
+.pager-btn:disabled{color:#ccc;cursor:not-allowed;}
+
+/* 弹窗 */
+.mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;}
+.mask.show{display:flex;}
+.modal{background:#fff;border-radius:8px;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 6px 32px rgba(0,0,0,.18);}
+.modal-hd{padding:16px 24px;font-size:16px;font-weight:600;color:#1a1a1a;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f0f0;}
+.modal-close{cursor:pointer;color:#999;font-size:20px;background:none;border:none;padding:0;}
+.modal-close:hover{color:#333;}
+.modal-bd{padding:24px;}
+.modal-ft{padding:12px 24px;border-top:1px solid #f0f0f0;display:flex;justify-content:flex-end;gap:8px;}
+.form-row{display:flex;align-items:flex-start;margin-bottom:18px;}
+.form-label{width:110px;padding-top:6px;font-size:13px;color:#555;flex-shrink:0;text-align:right;padding-right:12px;}
+.form-label .req{color:#ff4d4f;margin-right:2px;}
+.form-control{flex:1;}
+.form-control .inp,.form-control select{width:100%;height:32px;}
+.form-control select{border:1px solid #d9d9d9;border-radius:4px;padding:0 10px;font-size:13px;outline:none;appearance:none;cursor:pointer;background:#fff;}
+.char-count{font-size:12px;color:#999;text-align:right;margin-top:2px;}
+
+/* 详情弹窗 */
+.detail-item{display:flex;margin-bottom:16px;font-size:14px;}
+.detail-label{width:110px;color:#555;flex-shrink:0;text-align:right;padding-right:12px;}
+.detail-label .req{color:#ff4d4f;margin-right:2px;}
+.detail-value{color:#1a1a1a;font-weight:500;}
+.detail-section-title{font-size:15px;font-weight:600;color:#1a1a1a;margin:8px 0 16px;}
+.detail-table{width:100%;border-collapse:collapse;font-size:13px;}
+.detail-table th{padding:10px 12px;background:#fafafa;color:#555;font-weight:500;border-bottom:1px solid #f0f0f0;text-align:left;}
+.detail-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;color:#333;}
+</style>
+</head>
+<body>
+<div class="main-wrap">
+
+<div class="page-title">供应商账单</div>
+
+<div class="toolbar-add">
+  <button class="btn btn-add" onclick="openAddModal()">+ 新增</button>
+</div>
+
+<div class="content-scroll"><div class="content-inner">
+
+<div class="filter-wrap">
+<div class="toolbar">
+  <div class="fi-date">
+    <span class="label">出账日期：</span>
+    <div class="date-range">
+      <input type="date" value="2026-06-17"/>
+      <span class="sep">至</span>
+      <input type="date" value="2026-06-23"/>
+    </div>
+  </div>
+  <div class="fi">
+    <span class="label">供应商名称：</span>
+    <input type="text" class="inp" placeholder="请输入"/>
+  </div>
+  <div class="fi">
+    <span class="label">触客渠道：</span>
+    <div class="sel-wrap"><select><option value="">请选择</option><option>短信</option><option>IP消息</option><option>AI外呼</option></select></div>
+  </div>
+  <div class="fi">
+    <span class="label">状态：</span>
+    <div class="sel-wrap"><select><option value="">请选择</option><option>已应用</option><option>未应用</option></select></div>
+  </div>
+</div>
+<div class="toolbar-btns">
+  <button class="btn btn-primary">查询</button>
+  <button class="btn btn-default">重置</button>
+</div>
+</div><!-- /filter-wrap -->
+
+<div class="table-card"><div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>供应商名称</th><th>触客渠道</th><th>供应商类型</th><th>单价</th><th>状态</th>
+          <th>创建人</th><th>创建时间</th><th>更新人</th><th>更新时间</th><th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>杭州宽信-普短...</td><td>短信</td><td>线路供应商</td><td>0.078</td><td><span class="status-tag status-on">已应用</span></td><td>guowenxiu</td><td>2026-02-27 14:09:59</td><td>guowenxiu</td><td>2026-02-27 15:30:44</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>杭州宽信-普短...</td><td>短信</td><td>线路供应商</td><td>0.066</td><td><span class="status-tag status-on">已应用</span></td><td>guowenxiu</td><td>2026-02-27 14:09:59</td><td>guowenxiu</td><td>2026-02-27 15:30:44</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>杭州宽信-普短...</td><td>短信</td><td>线路供应商</td><td>0.084</td><td><span class="status-tag status-on">已应用</span></td><td>guowenxiu</td><td>2026-02-27 14:09:26</td><td>guowenxiu</td><td>2026-02-27 15:30:44</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>橙惟-普短电信</td><td>短信</td><td>线路供应商</td><td>0.082</td><td><span class="status-tag status-on">已应用</span></td><td>yangzhidan</td><td>2025-11-28 18:50:56</td><td>yangzhidan</td><td>2025-11-28 18:53:01</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>橙惟-普短联通</td><td>短信</td><td>线路供应商</td><td>0.047</td><td><span class="status-tag status-on">已应用</span></td><td>yangzhidan</td><td>2025-11-28 18:50:42</td><td>yangzhidan</td><td>2025-11-28 18:53:01</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>橙惟-普短移动</td><td>短信</td><td>线路供应商</td><td>0.079</td><td><span class="status-tag status-on">已应用</span></td><td>yangzhidan</td><td>2025-11-28 18:50:16</td><td>yangzhidan</td><td>2025-11-28 18:53:01</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>杭州宽信-普短...</td><td>短信</td><td>线路供应商</td><td>0.078</td><td><span class="status-tag status-on">已应用</span></td><td>yangzhidan</td><td>2025-11-28 14:39:39</td><td>yangzhidan</td><td>2025-11-28 14:40:17</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>卖油翁-IPhonor02</td><td>IP消息</td><td>线路供应商</td><td>0.045</td><td><span class="status-tag status-off">未应用</span></td><td>liziyi08</td><td>2025-11-18 17:33:00</td><td>liziyi08</td><td>2025-11-18 17:33:00</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>卖油翁-IPvivo04</td><td>IP消息</td><td>线路供应商</td><td>0.045</td><td><span class="status-tag status-off">未应用</span></td><td>liziyi08</td><td>2025-11-18 17:32:43</td><td>liziyi08</td><td>2025-11-18 17:32:43</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+        <tr><td>卖油翁-IPoppo04</td><td>IP消息</td><td>线路供应商</td><td>0.045</td><td><span class="status-tag status-off">未应用</span></td><td>liziyi08</td><td>2025-11-18 17:32:05</td><td>liziyi08</td><td>2025-11-18 17:32:05</td><td><button class="op-link" onclick="openDetail()">详情</button><button class="op-link">编辑</button><button class="op-link del">删除</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <div class="sel-wrap"><select style="height:28px;font-size:13px;min-width:90px;"><option>20 条/页</option><option>50 条/页</option></select></div>
+    <div class="pager">
+      <button class="pager-btn" disabled>‹</button>
+      <button class="pager-btn active">1</button>
+      <button class="pager-btn">2</button>
+      <button class="pager-btn">›</button>
+    </div>
+  </div>
+</div><!-- /table-card -->
+</div></div><!-- /content-inner /content-scroll -->
+
+<!-- 新增弹窗 -->
+<div class="mask" id="addMask">
+  <div class="modal">
+    <div class="modal-hd">新增供应商<button class="modal-close" onclick="closeModal('addMask')">×</button></div>
+    <div class="modal-bd">
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>供应商名称：</div>
+        <div class="form-control"><input type="text" class="inp" placeholder="请输入供应商名称" maxlength="50" oninput="updateCount(this,'nc')"/><div class="char-count"><span id="nc">0</span>/50</div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>触客渠道：</div>
+        <div class="form-control"><select><option value="">请选择触客渠道</option><option>短信</option><option>IP消息</option><option>AI外呼</option></select></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-default" onclick="closeModal('addMask')">取消</button>
+      <button class="btn btn-primary" onclick="closeModal('addMask')">确定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 详情弹窗 -->
+<div class="mask" id="detailMask">
+  <div class="modal" style="width:760px;">
+    <div class="modal-hd">供应商详情<button class="modal-close" onclick="closeModal('detailMask')">×</button></div>
+    <div class="modal-bd">
+      <div class="detail-item"><div class="detail-label"><span class="req">*</span>供应商名称：</div><div class="detail-value">橙惟-普短联通</div></div>
+      <div class="detail-item"><div class="detail-label"><span class="req">*</span>触客渠道：</div><div class="detail-value">短信</div></div>
+      <div class="detail-item"><div class="detail-label"><span class="req">*</span>供应商类型：</div><div class="detail-value">线路供应商</div></div>
+      <div class="detail-item"><div class="detail-label"><span class="req">*</span>单价：</div><div class="detail-value">0.047</div></div>
+      <div class="detail-item"><div class="detail-label">创建人：</div><div class="detail-value">yangzhidan</div></div>
+      <div class="detail-item"><div class="detail-label">创建时间：</div><div class="detail-value">2025-11-28 18:50:42</div></div>
+      <div class="detail-section-title">编辑记录</div>
+      <table class="detail-table">
+        <thead><tr><th>更新字段</th><th>更新后</th><th>更新人</th><th>更新时间</th><th>变更原因</th></tr></thead>
+        <tbody>
+          <tr><td>状态</td><td>已应用</td><td>system</td><td>2025-11-28 18:53:02</td><td>系统更新状态</td></tr>
+          <tr><td>供应商名称</td><td>橙惟-普短联通</td><td>yangzhidan</td><td>2025-11-28 18:50:42</td><td>新增</td></tr>
+          <tr><td>触客渠道</td><td>短信</td><td>yangzhidan</td><td>2025-11-28 18:50:42</td><td>新增</td></tr>
+          <tr><td>供应商类型</td><td>线路供应商</td><td>yangzhidan</td><td>2025-11-28 18:50:42</td><td>新增</td></tr>
+          <tr><td>单价</td><td>0.047</td><td>yangzhidan</td><td>2025-11-28 18:50:42</td><td>新增</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAddModal(){document.getElementById('addMask').classList.add('show');}
+function openDetail(){document.getElementById('detailMask').classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function updateCount(inp,id){document.getElementById(id).textContent=inp.value.length;}
+document.querySelectorAll('.mask').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+</script>
+</div><!-- /main-wrap -->
+</body>
+</html>

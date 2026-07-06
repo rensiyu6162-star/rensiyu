@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>产品设计思路 | 任思雨个人作品集网站</title>
+<style>
+:root{--color-bg:#0d0818;--color-text:#e8e4f0;--color-text-soft:#8a80a8;--color-text-secondary:#b0a8c8;--color-border:rgba(0,240,255,.10);--color-accent:#00f0ff;--color-magenta:#ff00aa;--radius-lg:18px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--color-bg);color:var(--color-text);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,240,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(176,0,255,.04) 1px,transparent 1px);background-size:48px 48px}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 15% 8%,rgba(0,240,255,.14),transparent 28%),radial-gradient(circle at 85% 20%,rgba(255,0,170,.10),transparent 30%)}
+a{color:inherit;text-decoration:none}
+.page{position:relative;z-index:1;min-height:100vh;padding:1rem 0 4rem}
+.topbar{max-width:1100px;margin:0 auto 1.5rem;padding:0 clamp(1rem,4vw,3.5rem)}.ui-button{display:inline-flex;align-items:center;gap:.42rem;border:1px solid rgba(0,240,255,.22);border-radius:6px;padding:.46rem .88rem;background:rgba(18,10,32,.58);color:var(--color-text);font-size:.78rem;transition:all .2s}.ui-button:hover{border-color:rgba(0,240,255,.42);color:var(--color-accent);background:rgba(0,240,255,.08)}
+.content{max-width:1100px;margin:0 auto;padding:0 clamp(1rem,4vw,3.5rem)}
+.hero{margin-bottom:2.2rem}.eyebrow{display:inline-flex;align-items:center;gap:.42rem;border:1px solid var(--color-border);border-radius:999px;padding:.32rem .68rem;background:rgba(28,18,48,.46);color:var(--color-text-soft);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase}.eyebrow::before{content:'';width:.38rem;height:.38rem;border-radius:999px;background:var(--color-accent);box-shadow:0 0 14px var(--color-accent)}
+h1{margin-top:.85rem;font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:500;line-height:1.1;letter-spacing:-.02em}
+.lead{max-width:none;margin-top:.9rem;color:var(--color-text-secondary);font-size:clamp(.92rem,1.08vw,1.02rem);line-height:1.78}
+.section{margin-top:3rem}.section-label{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}.section-num{display:grid;place-items:center;width:2rem;height:2rem;border-radius:999px;border:1px solid rgba(0,240,255,.2);background:rgba(0,240,255,.08);color:var(--color-accent);font-size:.72rem;font-weight:800;flex-shrink:0}
+h2{font-size:clamp(1rem,1.65vw,1.35rem);letter-spacing:-.015em}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,var(--color-accent),var(--color-magenta),transparent);opacity:.25;margin-top:.6rem}
+.card-grid{display:grid;gap:1rem;margin-top:1rem}
+.card{border:1px solid rgba(0,240,255,.08);border-radius:var(--radius-lg);background:rgba(18,10,32,.6);padding:1rem 1.1rem;position:relative;overflow:hidden}.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--color-accent),var(--color-magenta));opacity:.6}
+.card h3{font-size:.88rem;font-weight:700;color:var(--color-text)}
+.card p,.card li{font-size:.84rem;line-height:1.72;color:var(--color-text-secondary);margin-top:.35rem}
+.card ul{padding-left:1rem;margin-top:.4rem}.card li{list-style:none;padding-left:.4rem}.card li::before{content:'›';margin-right:.4rem;color:var(--color-accent)}
+.tag-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.65rem}
+.tag{border:1px solid rgba(0,240,255,.15);border-radius:999px;padding:.2rem .52rem;font-size:.7rem;color:var(--color-accent);background:rgba(0,240,255,.06)}
+.col2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.persona-table{display:grid;grid-template-columns:1fr;gap:.85rem;margin-top:1rem}.persona-row-wrap{display:grid;grid-template-columns:5.5rem 1fr 1fr 1fr;gap:0;border:1px solid rgba(0,240,255,.08);border-radius:var(--radius-lg);overflow:hidden;background:rgba(18,10,32,.5)}.persona-row-wrap:first-child{border-top:none;overflow:visible;margin-top:3.5rem}.persona-row-label{display:flex;align-items:center;padding:.55rem .65rem;font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-soft);background:rgba(0,240,255,.04);border-right:1px solid rgba(0,240,255,.08)}.persona-cell{padding:.55rem .75rem;border-left:1px solid rgba(0,240,255,.06);font-size:.8rem;line-height:1.55;color:var(--color-text-secondary)}.persona-cell-head{background:linear-gradient(180deg,rgba(0,240,255,.07),transparent);display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:4rem .4rem .8rem;position:relative;overflow:visible}.persona-icon{position:absolute;top:-3rem;left:50%;transform:translateX(-50%);width:6.4rem;height:6.4rem;border-radius:999px;border:2px solid rgba(0,240,255,.22);display:grid;place-items:center;background:rgba(0,240,255,.08);overflow:hidden;z-index:2}.persona-icon img{width:100%;height:100%;object-fit:cover;border-radius:999px}.persona-icon svg{width:3rem;height:3rem;color:var(--color-accent)}.persona-role{font-size:.64rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--color-accent);text-align:center}.persona-tags{display:flex;flex-wrap:wrap;gap:.28rem}.persona-tag{font-size:.62rem;padding:.13rem .34rem;border-radius:999px;border:1px solid rgba(0,240,255,.15);color:var(--color-text-secondary);background:rgba(0,240,255,.05)}
+@media(max-width:760px){.persona-row-wrap{grid-template-columns:3.8rem 1fr 1fr 1fr;gap:0}.persona-row-labels{display:none}.persona-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.persona-row-wrap{grid-template-columns:1fr 1fr 1fr;}.persona-row-label{display:none}}
+@media(max-width:760px){.persona-table{grid-template-columns:1fr}.persona-row-labels{display:none}.persona-grid{grid-template-columns:1fr}}
+/* MoSCoW redesign — 4-card grid with priority badges */
+.moscow-wrap{margin-top:1.2rem;display:grid;grid-template-columns:2.5rem 1fr 2.5rem;grid-template-rows:1.4rem 1fr 1.4rem;gap:0}
+.moscow-wrap .ax-top{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.moscow-wrap .ax-bottom{grid-column:2;grid-row:3;display:flex;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.moscow-wrap .ax-left{grid-column:1;grid-row:2;display:flex;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.moscow-wrap .ax-right{grid-column:3;grid-row:2;display:flex;align-items:center;justify-content:center;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.moscow{grid-column:2;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:.75rem;position:relative}
+.moscow::before{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.08);pointer-events:none;z-index:1}
+.moscow::after{content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(255,255,255,.08);pointer-events:none;z-index:1}
+.mq{border-radius:var(--radius-lg);padding:1.2rem 1.25rem 1.25rem;display:flex;flex-direction:column;gap:.7rem;position:relative;overflow:hidden}
+.mq::after{content:'';position:absolute;inset:0;opacity:.035;background:repeating-linear-gradient(45deg,currentColor 0,currentColor 1px,transparent 0,transparent 50%);background-size:12px 12px;pointer-events:none}
+.mq-badge{display:inline-flex;align-items:center;gap:.38rem;padding:.22rem .58rem;border-radius:999px;font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;width:fit-content}
+.mq-head{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.mq-title{font-size:1rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.mq-sub{font-size:.7rem;color:rgba(255,255,255,.42)}
+.mq ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:.32rem;margin-top:.1rem}
+.mq li{font-size:.8rem;line-height:1.55;color:rgba(255,255,255,.72);display:flex;gap:.5rem;align-items:flex-start}
+.mq li::before{content:'';flex-shrink:0;width:.4rem;height:.4rem;border-radius:999px;margin-top:.45rem}
+/* Must */
+.mq-must{background:linear-gradient(145deg,rgba(0,240,255,.13) 0%,rgba(0,80,200,.10) 100%);border:1px solid rgba(0,240,255,.18)}
+.mq-must .mq-badge{background:rgba(0,240,255,.15);color:#00f0ff;border:1px solid rgba(0,240,255,.3)}
+.mq-must .mq-title{color:#00f0ff}
+.mq-must li::before{background:#00f0ff;box-shadow:0 0 6px rgba(0,240,255,.7)}
+/* Should */
+.mq-should{background:linear-gradient(145deg,rgba(0,210,130,.12) 0%,rgba(0,130,80,.08) 100%);border:1px solid rgba(0,210,130,.18)}
+.mq-should .mq-badge{background:rgba(0,210,130,.15);color:#00e08a;border:1px solid rgba(0,210,130,.3)}
+.mq-should .mq-title{color:#00e08a}
+.mq-should li::before{background:#00e08a;box-shadow:0 0 6px rgba(0,210,130,.6)}
+/* Could */
+.mq-could{background:linear-gradient(145deg,rgba(255,175,0,.11) 0%,rgba(200,110,0,.07) 100%);border:1px solid rgba(255,175,0,.18)}
+.mq-could .mq-badge{background:rgba(255,175,0,.14);color:#ffb400;border:1px solid rgba(255,175,0,.3)}
+.mq-could .mq-title{color:#ffb400}
+.mq-could li::before{background:#ffb400;box-shadow:0 0 6px rgba(255,175,0,.6)}
+/* Won't */
+.mq-wont{background:linear-gradient(145deg,rgba(130,80,200,.12) 0%,rgba(80,40,150,.08) 100%);border:1px solid rgba(130,80,200,.2)}
+.mq-wont .mq-badge{background:rgba(130,80,200,.15);color:#c080ff;border:1px solid rgba(130,80,200,.32)}
+.mq-wont .mq-title{color:#c080ff}
+.mq-wont li::before{background:#c080ff;box-shadow:0 0 6px rgba(160,100,255,.5)}
+@media(max-width:640px){.moscow{grid-template-columns:1fr}}
+/* IA tree */
+.ia-tree{margin-top:1.4rem;display:flex;flex-direction:column;align-items:center;gap:0}
+.ia-root{display:flex;flex-direction:column;align-items:center;width:100%}
+.ia-node{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;font-weight:700;white-space:nowrap;position:relative}
+.ia-node-root{padding:.65rem 1.8rem;font-size:.95rem;background:linear-gradient(135deg,rgba(0,240,255,.18),rgba(0,80,255,.14));border:1.5px solid rgba(0,240,255,.4);color:#00f0ff;box-shadow:0 0 24px rgba(0,240,255,.12)}
+.ia-connector-v{width:2px;height:2rem;background:linear-gradient(180deg,rgba(0,240,255,.5),rgba(0,240,255,.2));margin:0 auto}
+.ia-level1{display:flex;justify-content:center;gap:1rem;width:100%;position:relative}
+.ia-level1::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1.5px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.25) 20%,rgba(0,240,255,.25) 80%,transparent)}
+.ia-col{display:flex;flex-direction:column;align-items:center;gap:0}
+.ia-connector-v-sm{width:1.5px;height:1.2rem;background:linear-gradient(180deg,rgba(0,240,255,.25),rgba(0,240,255,.08));margin:0 auto}
+.ia-connector-v-sub{width:1px;height:1rem;background:linear-gradient(180deg,rgba(255,255,255,.15),transparent);margin:0 auto}
+.ia-node-main{padding:.5rem 1.1rem;font-size:.82rem;background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.22);color:var(--color-text)}
+.ia-node-sub{padding:.35rem .85rem;font-size:.75rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--color-text-secondary);font-weight:500}
+.ia-node svg{flex-shrink:0}
+@media(max-width:720px){.col2{grid-template-columns:1fr}.page{padding-top:.8rem}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <a class="ui-button" href="index.html#built-with-codex">返回网站</a>
+  </header>
+  <main class="content">
+
+    <section class="hero">
+      <span class="eyebrow">PRODUCT DESIGN THINKING</span>
+      <h1>个人作品集网站 · 产品设计思路</h1>
+      <p class="lead" style="max-width:none">以产品经理视角，复盘这个个人品牌网站从用户分析、需求拆解到具体落地的完整工作流。本网站由我主导定义信息架构与产品逻辑，与 AI（Comate/Codex）协作完成前端实现与迭代优化。</p>
+    </section>
+
+    <!-- 一 用户分析 -->
+    <section class="section">
+      <div class="section-label">
+        <span class="section-num">01</span>
+        <h2>用户分析</h2>
+      </div>
+      <div class="divider"></div>
+
+      <div class="persona-table">
+        <!-- 头像行 -->
+        <div class="persona-row-wrap">
+          <div class="persona-row-label">用户类型</div>
+          <div class="persona-cell persona-cell-head">
+            <div class="persona-icon"><img src="hr.png" alt="HR"></div>
+            <span class="persona-role">HR 初筛</span>
+          </div>
+          <div class="persona-cell persona-cell-head" style="border-left:1px solid rgba(255,0,170,.12)">
+            <div class="persona-icon" style="border-color:rgba(255,0,170,.3)"><img src="业务面试官.png" alt="业务面试官"></div>
+            <span class="persona-role" style="color:var(--color-magenta)">业务面试官</span>
+          </div>
+          <div class="persona-cell persona-cell-head" style="border-left:1px solid rgba(77,141,255,.12)">
+            <div class="persona-icon" style="border-color:rgba(77,141,255,.35)"><img src="产品负责人.png" alt="产品负责人"></div>
+            <span class="persona-role" style="color:#4d8dff">产品负责人</span>
+          </div>
+        </div>
+        <!-- 核心诉求行 -->
+        <div class="persona-row-wrap">
+          <div class="persona-row-label">核心诉求</div>
+          <div class="persona-cell">快速判断背景与方向匹配度</div>
+          <div class="persona-cell">验证产品能力深度与项目真实性</div>
+          <div class="persona-cell">判断思维框架、AI 理解力与团队适配性</div>
+        </div>
+        <!-- 决策场景行 -->
+        <div class="persona-row-wrap">
+          <div class="persona-row-label">决策场景</div>
+          <div class="persona-cell">⏱ 30 秒内决定是否继续深看；从招聘平台点击链接，桌面端浏览首屏。</div>
+          <div class="persona-cell">🔍 面试前预习，重点扫描实习经历与项目细节；关注方法论是否扎实。</div>
+          <div class="persona-cell">🧠 关注方法论与定位清晰度；面试后主动回访，深度阅读 AI 能力与设计思路。</div>
+        </div>
+        <!-- 关键词行 -->
+        <div class="persona-row-wrap">
+          <div class="persona-row-label">关键词</div>
+          <div class="persona-cell"><div class="persona-tags"><span class="persona-tag">方向匹配</span><span class="persona-tag">背景可信</span><span class="persona-tag">信息清晰</span></div></div>
+          <div class="persona-cell"><div class="persona-tags"><span class="persona-tag" style="border-color:rgba(255,0,170,.2);color:var(--color-magenta)">项目细节</span><span class="persona-tag" style="border-color:rgba(255,0,170,.2);color:var(--color-magenta)">真实落地</span></div></div>
+          <div class="persona-cell"><div class="persona-tags"><span class="persona-tag" style="border-color:rgba(77,141,255,.25);color:#4d8dff">方法论</span><span class="persona-tag" style="border-color:rgba(77,141,255,.25);color:#4d8dff">AI理解</span><span class="persona-tag" style="border-color:rgba(77,141,255,.25);color:#4d8dff">团队适配</span></div></div>
+        </div>
+      </div>
+
+      <div class="card-grid col2" style="margin-top:.85rem">
+        <div class="card">
+          <h3>核心痛点</h3>
+          <ul>
+            <li>传统简历信息密度高但缺乏立体感，无法直观感知候选人的产品思维</li>
+            <li>面试官时间成本高，希望在最短路径内获取最高价值信息</li>
+            <li>AI产品方向候选人市场认知模糊，面试官难以快速判断真实能力</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>使用场景假设</h3>
+          <ul>
+            <li>HR 从 Boss/招聘平台点击链接，桌面端快速浏览首屏</li>
+            <li>面试官在面试前预习，重点查看实习经历与项目细节</li>
+            <li>面试结束后对方主动回访，深度阅读 AI 能力与设计思路</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 二 需求分析 -->
+    <section class="section">
+      <div class="section-label">
+        <span class="section-num">02</span>
+        <h2>需求分析（MoSCoW 优先级）</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="moscow-wrap">
+        <div class="ax-top">高重要性 ↑</div>
+        <div class="ax-left">可缓</div>
+        <div class="moscow">
+
+        <div class="mq mq-could">
+          <span class="mq-badge">Could Have</span>
+          <div class="mq-head">
+            <p class="mq-title">加分项</p>
+            <p class="mq-sub">可做 · 不影响核心体验</p>
+          </div>
+          <ul>
+            <li>动效与视觉氛围强化个人风格记忆点</li>
+            <li>多页面深度内容（AI能力全景、生活中的我）</li>
+            <li>移动端适配</li>
+          </ul>
+        </div>
+
+        <div class="mq mq-must">
+          <span class="mq-badge">Must Have</span>
+          <div class="mq-head">
+            <p class="mq-title">核心转化路径</p>
+            <p class="mq-sub">立刻做 · 不可缺失</p>
+          </div>
+          <ul>
+            <li>清晰的身份定位（AI产品 / 用户产品 / 平台产品经理）</li>
+            <li>可信度背书（教育背景、多段实习、真实项目成果）</li>
+            <li>零门槛访问，打开即可预览</li>
+          </ul>
+        </div>
+
+        <div class="mq mq-wont">
+          <span class="mq-badge">Won't Have</span>
+          <div class="mq-head">
+            <p class="mq-title">主动舍弃</p>
+            <p class="mq-sub">此版本不做 · 维护成本 > 收益</p>
+          </div>
+          <ul>
+            <li>复杂后端逻辑（维护成本高于收益）</li>
+            <li>所有项目细节堆在首页</li>
+            <li>炫技式动效喧宾夺主</li>
+          </ul>
+        </div>
+
+        <div class="mq mq-should">
+          <span class="mq-badge">Should Have</span>
+          <div class="mq-head">
+            <p class="mq-title">深度体验</p>
+            <p class="mq-sub">重要 · 有条件优先实现</p>
+          </div>
+          <ul>
+            <li>差异化记忆点：工科设计背景 × AI 实战复合能力</li>
+            <li>非线性信息架构，面试官按需深挖</li>
+            <li>AI 能力具体化，有真实落地场景支撑</li>
+          </ul>
+        </div>
+
+        </div><!-- /moscow -->
+        <div class="ax-right">紧迫</div>
+        <div class="ax-bottom">↓ 低重要性</div>
+      </div><!-- /moscow-wrap -->
+    </section>
+
+    <!-- 三 产品定位与信息架构 -->
+    <section class="section">
+      <div class="section-label">
+        <span class="section-num">03</span>
+        <h2>产品定位与信息架构</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="card" style="margin-top:1rem">
+        <h3>核心定位</h3>
+        <p>一个"会用AI、做过产品、有设计感"的复合型产品经理候选人立体展示工具——而非普通简历的数字化版本。核心差异：将设计专业背景、AI产品实战与项目推进能力整合进同一叙事框架，形成三位一体的能力定位。</p>
+      </div>
+
+      <!-- 树形信息架构图 -->
+      <div class="ia-tree">
+        <div class="ia-root">
+          <!-- 根节点 -->
+          <div class="ia-node ia-node-root">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            个人主页 · 首页
+          </div>
+          <div class="ia-connector-v"></div>
+
+          <!-- 主干层 -->
+          <div class="ia-level1">
+
+            <!-- About -->
+            <div class="ia-col">
+              <div class="ia-node ia-node-main" style="background:rgba(0,240,255,.1);border-color:rgba(0,240,255,.3)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M8 8h8M8 16h5"/></svg>
+                About
+              </div>
+              <div class="ia-connector-v-sm"></div>
+              <div class="ia-node ia-node-sub">身份定位 · AI方向 · Pillars</div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub" style="border-color:rgba(0,240,255,.2);color:var(--color-accent)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                AI 能力全景 ↗ 独立子页
+              </div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub" style="border-color:rgba(255,0,170,.2);color:var(--color-magenta)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                生活中的我 ↗ 独立子页
+              </div>
+            </div>
+
+            <!-- Education -->
+            <div class="ia-col">
+              <div class="ia-node ia-node-main">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                Education
+              </div>
+              <div class="ia-connector-v-sm"></div>
+              <div class="ia-node ia-node-sub">江南大学 · 研究生 · 本科</div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub">交互设计 · 工业设计背景</div>
+            </div>
+
+            <!-- Experience -->
+            <div class="ia-col">
+              <div class="ia-node ia-node-main" style="background:rgba(0,240,255,.12);border-color:rgba(0,240,255,.3)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Experience 实习地图
+              </div>
+              <div class="ia-connector-v-sm"></div>
+              <div class="ia-node ia-node-sub">4段城市实习轨迹 · 悬浮卡片</div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub">百度 / vivo / 国家电网 / 联想</div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub">Hover → 公司简介 + 实习详情</div>
+            </div>
+
+            <!-- Projects / Skills -->
+            <div class="ia-col">
+              <div class="ia-node ia-node-main">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"/></svg>
+                Projects · Skills
+              </div>
+              <div class="ia-connector-v-sm"></div>
+              <div class="ia-node ia-node-sub">精选项目卡片 · 技能标签</div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub">Awards · Resume · Portfolio</div>
+            </div>
+
+            <!-- Built with Comate -->
+            <div class="ia-col">
+              <div class="ia-node ia-node-main" style="border-color:rgba(255,180,0,.25);color:#ffb400">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Built with Comate
+              </div>
+              <div class="ia-connector-v-sm"></div>
+              <div class="ia-node ia-node-sub">设计思路 ↗ 本页面</div>
+              <div class="ia-connector-v-sub"></div>
+              <div class="ia-node ia-node-sub">Contact 联系方式</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 四 关键交互设计决策 -->
+    <section class="section">
+      <div class="section-label">
+        <span class="section-num">04</span>
+        <h2>关键交互设计决策</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>侧导航默认开启</h3>
+          <p>目标用户以桌面端为主，侧导航可持续提供页面锚点，同时不占用内容区域宽度。支持一键切换顶导 / 收起侧栏，满足不同浏览习惯。</p>
+        </div>
+        <div class="card">
+          <h3>实习地图 Hover 框稳定驻留</h3>
+          <p>解决"鼠标移到 tooltip 上卡片立即消失"的可用性问题。通过 CSS pointer-events 控制，只要鼠标未完全离开 hover 框，浮层就持续展示，避免反复触发造成的挫败感。</p>
+        </div>
+        <div class="card">
+          <h3>子页面回锚定位</h3>
+          <p>从 AI能力全景 / 生活页返回时，页面自动定位到进入时的来源卡片（通过 URL hash + 元素 id 实现），避免用户迷失在首页顶部重新查找。</p>
+        </div>
+        <div class="card">
+          <h3>个人照片轮播</h3>
+          <p>4 张生活照每 5 秒自动切换，支持手动前后翻页与点状指示器，平衡真实感与信息获取效率，避免静态单图的单薄感。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 五 视觉设计决策 -->
+    <section class="section">
+      <div class="section-label">
+        <span class="section-num">05</span>
+        <h2>视觉设计决策</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="card" style="margin-top:1rem">
+        <h3>为什么选深色赛博朋克风格，而非常规极简白底？</h3>
+        <ul>
+          <li>差异化记忆点：同类候选人网站多为极简白底，暗色科技感在面试官浏览多份作品集后具有显著记忆优势</li>
+          <li>与 AI 产品方向高度契合：视觉语言传达"懂技术审美、有设计专业度"</li>
+          <li>设计背景的直接体现：工业设计 + 交互设计背景的候选人，视觉品质本身就是能力的一种展示</li>
+        </ul>
+      </div>
+      <div class="card-grid col2" style="margin-top:.75rem">
+        <div class="card">
+          <h3>视觉语言系统</h3>
+          <ul>
+            <li>主色调：深紫黑背景 + 青色（#00f0ff）+ 品红（#ff00aa）双主色</li>
+            <li>材质感：毛玻璃卡片（backdrop-filter blur）+ 网格背景纹理</li>
+            <li>动态背景：魔法阵风格 Canvas 动画，增强科技氛围</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>排版策略</h3>
+          <ul>
+            <li>信息层级通过字号、字重、颜色三维度区分，不依赖复杂装饰</li>
+            <li>关键数字和标签用 clamp() 响应式字号，保证不同屏幕比例一致</li>
+            <li>重要文案控制在 54ch 内，保证最佳阅读舒适度</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 六 技术选型与落地 -->
+    <section class="section">
+      <div class="section-label">
+        <span class="section-num">06</span>
+        <h2>技术选型与落地路径</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="card" style="margin-top:1rem">
+        <h3>为什么选纯静态 HTML/CSS/JS，不用框架？</h3>
+        <ul>
+          <li>部署门槛极低：本地 python3 -m http.server 即可预览，上线只需拖拽文件夹</li>
+          <li>维护成本低：内容调整直接编辑 HTML，无构建流程</li>
+          <li>加载速度快：面试官点开时零等待，首屏体验即决策体验</li>
+          <li>AI 协作友好：静态代码对 AI 工具透明，便于与 Comate/Codex 持续迭代</li>
+        </ul>
+      </div>
+      <div class="card-grid col2" style="margin-top:.75rem">
+        <div class="card">
+          <h3>与 AI 的协作分工</h3>
+          <ul>
+            <li><strong style="color:var(--color-text)">我主导：</strong>用户分析、信息架构、内容文案、设计语言决策、交互逻辑定义</li>
+            <li><strong style="color:var(--color-text)">AI 负责：</strong>CSS 实现、动效代码、布局微调、批量文案替换与 Bug 修复</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>迭代方式</h3>
+          <ul>
+            <li>基于面试官真实反馈持续微调文案与信息层级</li>
+            <li>求职方向变化时同步更新定位文案与能力描述</li>
+            <li>网站本质是动态求职材料，非一次性交付物</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 七 设计收益 -->
+    <section class="section" style="margin-bottom:2rem">
+      <div class="section-label">
+        <span class="section-num">07</span>
+        <h2>设计收益与反思</h2>
+      </div>
+      <div class="divider"></div>
+      <div class="card-grid col2" style="margin-top:1rem">
+        <div class="card">
+          <h3>预期收益</h3>
+          <ul>
+            <li>相比纯简历，信息传达更立体，减少面试前沟通成本</li>
+            <li>AI能力有具体落地案例支撑，减少面试官的信任成本</li>
+            <li>视觉差异化提升记忆留存率，增加主动回访可能性</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>局限与后续优化方向</h3>
+          <ul>
+            <li>内容较多，首屏信息密度仍可继续压缩</li>
+            <li>移动端体验有待进一步打磨</li>
+            <li>可加入访问统计，了解哪些模块被访问频率最高，指导下一轮迭代</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tag-row" style="margin-top:1.2rem">
+        <span class="tag">用户分析</span><span class="tag">需求拆解</span><span class="tag">信息架构</span><span class="tag">交互设计</span><span class="tag">视觉决策</span><span class="tag">AI协作开发</span><span class="tag">静态部署</span><span class="tag">持续迭代</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PO单商品拆解 - 百战营销平台</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;background:#f5f6fa;color:#333;padding:24px;}
+.page-title{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:16px;}
+
+.toolbar{display:flex;align-items:center;flex-wrap:wrap;margin-bottom:16px;gap:8px;}
+.fi{display:inline-flex;align-items:center;gap:6px;width:260px;flex-shrink:0;}
+.fi .label{font-size:13px;color:#555;white-space:nowrap;flex-shrink:0;}
+.fi .inp{flex:1;min-width:0;}
+.toolbar-btns{display:flex;align-items:center;gap:8px;margin-left:auto;}
+
+.inp{height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 10px;font-size:13px;outline:none;color:#333;background:#fff;}
+.inp:focus{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.08);}
+.sel-wrap{position:relative;display:inline-block;}
+.sel-wrap select{height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 28px 0 10px;font-size:13px;outline:none;color:#333;background:#fff;appearance:none;cursor:pointer;}
+.sel-wrap select:focus{border-color:#1677ff;}
+.sel-wrap::after{content:"";position:absolute;right:10px;top:50%;transform:translateY(-50%);border:4px solid transparent;border-top:5px solid #999;pointer-events:none;}
+
+.btn{height:32px;padding:0 16px;border-radius:4px;border:1px solid transparent;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;white-space:nowrap;}
+.btn-primary{background:#1677ff;color:#fff;border-color:#1677ff;}
+.btn-primary:hover{background:#4096ff;}
+.btn-default{background:#fff;color:#333;border-color:#d9d9d9;}
+.btn-default:hover{color:#1677ff;border-color:#1677ff;}
+.btn-success{background:#fff;color:#52c41a;border-color:#52c41a;}
+.btn-success:hover{background:#52c41a;color:#fff;}
+
+/* 计算器卡片 */
+.card{background:#fff;border-radius:6px;border:1px solid #e8e8e8;padding:24px;margin-bottom:16px;}
+.card-title{font-size:15px;font-weight:600;color:#1a1a1a;margin-bottom:20px;}
+.formula-tip{background:#f0f7ff;border:1px solid #bae0ff;border-radius:4px;padding:12px 16px;font-size:13px;color:#0958d9;margin-bottom:20px;line-height:2;}
+.formula-tip b{color:#003eb3;}
+.formula-tip code{background:#dbeeff;padding:1px 5px;border-radius:3px;font-family:monospace;font-size:13px;}
+
+.calc-layout{display:flex;gap:32px;flex-wrap:wrap;}
+.calc-inputs{width:320px;flex-shrink:0;}
+.calc-result{flex:1;min-width:300px;}
+
+.form-row{display:flex;align-items:flex-start;margin-bottom:16px;}
+.form-label{width:160px;padding-top:6px;font-size:13px;color:#555;flex-shrink:0;text-align:right;padding-right:12px;}
+.form-label .req{color:#ff4d4f;margin-right:2px;}
+.form-control{flex:1;}
+.form-control .inp{width:100%;}
+.form-hint{font-size:12px;color:#999;margin-top:4px;}
+
+.result-empty{border:1px dashed #d9d9d9;border-radius:6px;min-height:180px;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:14px;}
+.result-table-wrap{display:none;}
+.res-table{width:100%;border-collapse:collapse;font-size:14px;border:1px solid #e8e8e8;overflow:hidden;}
+.res-table th{padding:11px 16px;background:#fafafa;color:#555;font-weight:500;border-bottom:1px solid #f0f0f0;text-align:left;}
+.res-table td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;}
+.res-table tr:last-child td{border-bottom:none;}
+.res-table .total-row td{background:#f6f9ff;font-weight:600;color:#1677ff;}
+.verify-ok{color:#52c41a;font-size:13px;margin-top:10px;font-weight:500;}
+.verify-fail{color:#ff4d4f;font-size:13px;margin-top:10px;font-weight:500;}
+.steps-box{background:#fafafa;border:1px solid #f0f0f0;border-radius:4px;padding:12px 16px;font-size:12px;color:#666;line-height:2;margin-top:12px;}
+.steps-box code{background:#f0f5ff;color:#1677ff;padding:1px 4px;border-radius:3px;font-family:monospace;}
+
+/* 表格 */
+.table-card{background:#fff;border-radius:6px;border:1px solid #e8e8e8;}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:12px 16px;text-align:left;color:#555;font-weight:500;background:#fafafa;white-space:nowrap;border-bottom:1px solid #f0f0f0;}
+td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;white-space:nowrap;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#fafafa;}
+.status-tag{display:inline-block;padding:1px 8px;border-radius:2px;font-size:12px;}
+.status-on{background:#f6ffed;color:#52c41a;border:1px solid #b7eb8f;}
+.op-link{color:#1677ff;cursor:pointer;font-size:13px;margin-right:8px;background:none;border:none;padding:0;}
+.op-link:hover{color:#4096ff;}
+.pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:14px 16px;border-top:1px solid #f0f0f0;font-size:13px;color:#555;}
+.pager{display:flex;align-items:center;gap:4px;}
+.pager-btn{min-width:28px;height:28px;padding:0 6px;border:1px solid #d9d9d9;border-radius:4px;background:#fff;cursor:pointer;font-size:13px;color:#333;display:flex;align-items:center;justify-content:center;}
+.pager-btn:hover{border-color:#1677ff;color:#1677ff;}
+.pager-btn.active{background:#1677ff;color:#fff;border-color:#1677ff;}
+</style>
+</head>
+<body>
+
+<div class="page-title">PO单商品拆解</div>
+
+<div class="card">
+  <div class="card-title">拆解计算器</div>
+  <div class="formula-tip">
+    <b>拆解公式：</b>设系统平均单价 P（3位小数），总条数 N<br/>
+    商品A单价 = <code>INT(P×100)/100</code>&nbsp;｜&nbsp;商品B单价 = <code>(INT(P×100)+1)/100</code><br/>
+    商品A条数 X = <code>N × (商品A单价 + 0.01 − P) × 100</code>&nbsp;｜&nbsp;商品B条数 = <code>N − X</code>
+  </div>
+  <div class="calc-layout">
+    <div class="calc-inputs">
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>客户名称：</div>
+        <div class="form-control"><input type="text" class="inp" id="iCustomer" placeholder="请输入客户名称"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>账单月份：</div>
+        <div class="form-control"><input type="month" class="inp" id="iMonth" value="2026-06"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>系统平均单价 P：</div>
+        <div class="form-control">
+          <input type="number" class="inp" id="iPrice" placeholder="例：0.103" step="0.001" min="0"/>
+          <div class="form-hint">元/条，3位小数</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>总条数 N：</div>
+        <div class="form-control"><input type="number" class="inp" id="iCount" placeholder="例：10000" min="1"/></div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn btn-default" onclick="resetCalc()">重置</button>
+        <button class="btn btn-primary" onclick="calculate()">计算</button>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="result-empty" id="resultEmpty">输入参数后点击"计算"</div>
+      <div class="result-table-wrap" id="resultWrap">
+        <table class="res-table">
+          <thead><tr><th>商品</th><th>单价（元/条）</th><th>条数</th><th>小计金额（元）</th></tr></thead>
+          <tbody>
+            <tr><td>商品A（低档）</td><td id="rPriceA">—</td><td id="rCountA">—</td><td id="rAmtA">—</td></tr>
+            <tr><td>商品B（高档）</td><td id="rPriceB">—</td><td id="rCountB">—</td><td id="rAmtB">—</td></tr>
+            <tr class="total-row"><td><b>合计校验</b></td><td>原始单价 P</td><td id="rTotalN">—</td><td id="rTotalAmt">—</td></tr>
+          </tbody>
+        </table>
+        <div id="verifyMsg"></div>
+        <div class="steps-box" id="stepsBox"></div>
+        <div style="margin-top:12px;"><button class="btn btn-success" onclick="saveRecord()">保存记录</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 历史记录 -->
+<div class="card" style="padding:0;">
+  <div style="padding:20px 24px 0;"><div class="card-title" style="margin-bottom:16px;">历史拆解记录</div></div>
+  <div class="toolbar" style="padding:0 24px 16px;">
+    <div class="fi">
+      <span class="label">账单月份：</span>
+      <input type="month" class="inp" value="2026-06"/>
+    </div>
+    <div class="fi">
+      <span class="label">客户名称：</span>
+      <input type="text" class="inp" placeholder="请输入"/>
+    </div>
+    <div class="toolbar-btns">
+      <button class="btn btn-primary">查询</button>
+      <button class="btn btn-default">重置</button>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>账单月份</th><th>客户名称</th><th>平均单价P</th><th>总条数N</th><th>商品A单价</th><th>商品A条数</th><th>商品B单价</th><th>商品B条数</th><th>合计金额校验</th><th>操作人</th><th>创建时间</th><th>操作</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2026-05</td><td>某客户A</td><td>0.103</td><td>10,000</td><td>0.10</td><td>7,000</td><td>0.11</td><td>3,000</td><td><span class="status-tag status-on">✓ 校验通过</span></td><td>张运营</td><td>2026-06-05 14:22:10</td><td><button class="op-link">查看详情</button></td></tr>
+        <tr><td>2026-05</td><td>某客户B</td><td>0.108</td><td>50,000</td><td>0.10</td><td>10,000</td><td>0.11</td><td>40,000</td><td><span class="status-tag status-on">✓ 校验通过</span></td><td>李运营</td><td>2026-06-05 15:10:33</td><td><button class="op-link">查看详情</button></td></tr>
+        <tr><td>2026-04</td><td>某客户C</td><td>0.115</td><td>30,000</td><td>0.11</td><td>15,000</td><td>0.12</td><td>15,000</td><td><span class="status-tag status-on">✓ 校验通过</span></td><td>张运营</td><td>2026-05-08 10:35:00</td><td><button class="op-link">查看详情</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <div class="sel-wrap"><select style="height:28px;font-size:13px;min-width:90px;"><option>20 条/页</option></select></div>
+    <div class="pager">
+      <button class="pager-btn" disabled>‹</button>
+      <button class="pager-btn active">1</button>
+      <button class="pager-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function calculate(){
+  const P=parseFloat(document.getElementById('iPrice').value);
+  const N=parseInt(document.getElementById('iCount').value,10);
+  if(isNaN(P)||isNaN(N)||P<=0||N<=0){alert('请正确填写平均单价P和总条数N');return;}
+  const intP100=Math.floor(P*100);
+  const pA=intP100/100, pB=(intP100+1)/100;
+  const X=Math.round(N*(pA+0.01-P)*100);
+  const cA=X, cB=N-X;
+  const amtA=+(pA*cA).toFixed(2), amtB=+(pB*cB).toFixed(2);
+  const total=+(amtA+amtB).toFixed(2), orig=+(P*N).toFixed(2);
+  const pass=Math.abs(total-orig)<0.02;
+  document.getElementById('rPriceA').textContent=pA.toFixed(2);
+  document.getElementById('rCountA').textContent=cA.toLocaleString();
+  document.getElementById('rAmtA').textContent=amtA.toFixed(2);
+  document.getElementById('rPriceB').textContent=pB.toFixed(2);
+  document.getElementById('rCountB').textContent=cB.toLocaleString();
+  document.getElementById('rAmtB').textContent=amtB.toFixed(2);
+  document.getElementById('rTotalN').textContent=N.toLocaleString();
+  document.getElementById('rTotalAmt').textContent=total.toFixed(2);
+  const vm=document.getElementById('verifyMsg');
+  vm.className=pass?'verify-ok':'verify-fail';
+  vm.textContent=pass?'✓ 校验通过：拆解合计（'+total.toFixed(2)+'元）= 原计费金额（'+orig.toFixed(2)+'元）':'✗ 校验不通过：拆解合计（'+total.toFixed(2)+'元）≠ 原计费金额（'+orig.toFixed(2)+'元）';
+  document.getElementById('stepsBox').innerHTML='INT(P×100) = <code>'+intP100+'</code><br/>商品A单价 = <code>'+pA.toFixed(2)+'</code> 元/条 ｜ 商品B单价 = <code>'+pB.toFixed(2)+'</code> 元/条<br/>商品A条数 X = <code>'+cA.toLocaleString()+' 条</code> ｜ 商品B条数 = <code>'+cB.toLocaleString()+' 条</code>';
+  document.getElementById('resultEmpty').style.display='none';
+  document.getElementById('resultWrap').style.display='block';
+}
+function resetCalc(){
+  ['iCustomer','iPrice','iCount'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('resultEmpty').style.display='flex';
+  document.getElementById('resultWrap').style.display='none';
+}
+function saveRecord(){
+  const c=document.getElementById('iCustomer').value.trim(),m=document.getElementById('iMonth').value;
+  if(!c){alert('请填写客户名称后再保存');return;}
+  alert('已保存：'+m+' '+c);
+}
+</script>
+</body>
+</html>

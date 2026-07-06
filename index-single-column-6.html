@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>任思雨 | AI 产品经理个人品牌页</title>
+<meta name="description" content="面向 HR、业务面试官与产品负责人的个人品牌网站，展示任思雨的 AI 产品定位、核心项目、设计背景与 Codex 协作开发能力。"/>
+<meta name="keywords" content="任思雨,AI 产品经理,个人网站,作品集,Codex,Agent 产品,产品经理,江南大学"/>
+<meta name="theme-color" content="#0a0a12" media="(prefers-color-scheme: dark)"/>
+<meta name="theme-color" content="#f5f0f8" media="(prefers-color-scheme: light)"/>
+<style>
+/* ===== CSS VARIABLES / THEME: CLASSIC CYBERPUNK NEON ===== */
+:root {
+  --color-bg: #faf5ec;
+  --color-text: #2a2830;
+  --color-text-soft: #9a96a8;
+  --color-text-secondary: #6a6878;
+  --color-border: rgba(160, 150, 180, 0.15);
+  --color-border-strong: rgba(180, 150, 200, 0.25);
+  --color-accent: #4499cc;
+  --color-accent-pink: #dd77aa;
+  --color-surface: #f2ede4;
+  --color-surface-elevated: #ece6dc;
+  --color-cyan: #4499cc;
+  --color-magenta: #dd77aa;
+  --color-purple: #b088d0;
+  --color-silver: #b0aab8;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --text-card-title: clamp(1.22rem, 2.2vw, 1.55rem);
+  --text-small: clamp(0.84rem, 1.1vw, 0.92rem);
+  --text-caption: clamp(0.78rem, 1vw, 0.84rem);
+}
+[data-theme="dark"] {
+  --color-bg: #0d0818;
+  --color-text: #e8e4f0;
+  --color-text-soft: #8a80a8;
+  --color-text-secondary: #b0a8c8;
+  --color-border: rgba(0, 240, 255, 0.10);
+  --color-border-strong: rgba(255, 0, 170, 0.20);
+  --color-accent: #00f0ff;
+  --color-accent-pink: #ff00aa;
+  --color-surface: rgba(18, 10, 32, 0.6);
+  --color-surface-elevated: rgba(28, 18, 48, 0.6);
+  --color-cyan: #00f0ff;
+  --color-magenta: #ff00aa;
+  --color-purple: #b000ff;
+  --color-silver: #9090b0;
+}
+
+/* ===== BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:120px;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--color-bg);color:var(--color-text);line-height:1.6;min-height:100vh}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font:inherit;color:inherit;border:none;background:none}
+input,textarea{font:inherit;color:inherit}
+
+/* ===== UTILITY ===== */
+.hidden{display:none!important}
+@media(min-width:1024px){.lg\\:block{display:block!important}.lg\\:hidden{display:none!important}}
+
+/* ===== LAYOUT ===== */
+.page-wrapper{min-height:100vh;background:var(--color-bg);color:var(--color-text)}
+.page-grid{margin:0 auto;max-width:1440px;display:grid;gap:3.5rem;padding:0 2.5rem 7rem;grid-template-columns:1fr}
+@media(min-width:1024px){.page-grid{padding:0 5rem 7rem;gap:4rem}}
+
+/* ===== EYEBROW ===== */
+.eyebrow{font-size:clamp(0.7rem,0.9vw,0.75rem);letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-soft);display:flex;align-items:center;gap:0.4rem}
+
+/* ===== SEGMENTED CONTROL ===== */
+.segmented-control{display:inline-flex;align-items:center;gap:0;border-radius:var(--radius-sm);background:var(--color-surface);padding:2px}
+.segmented-button{display:inline-flex;align-items:center;gap:0.3rem;padding:0.3rem 0.5rem;border-radius:4px;font-size:0.75rem;color:var(--color-text-soft);transition:all 0.2s}
+.segmented-button[data-active="true"]{background:var(--color-bg);color:var(--color-text)}
+.segmented-icon{padding:0.3rem 0.2rem 0.3rem 0.5rem;display:flex;color:var(--color-text-soft)}
+
+/* ===== NAV ITEM (shared) ===== */
+.nav-item{display:inline-flex;align-items:center;gap:0.75rem;min-height:2.5rem;padding:0.375rem 0;text-align:left;font-size:clamp(0.78rem,1vw,0.84rem);letter-spacing:0.04em;transition:color 0.2s}
+.nav-item .nav-dash{height:1px;border-radius:999px;width:1.25rem;background:var(--color-text-soft);transition:all 0.3s;flex-shrink:0}
+.nav-item:hover .nav-dash{width:2rem;background:var(--color-text-secondary)}
+.nav-item[data-active="true"]{color:var(--color-text)}
+.nav-item[data-active="true"] .nav-dash{width:2.5rem;background:var(--color-accent)}
+.nav-item:not([data-active="true"]){color:var(--color-text-soft)}
+
+/* ===== MOBILE HEADER ===== */
+.mobile-header{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--color-border);background:var(--color-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+@media(min-width:1024px){.mobile-header{display:none}}
+.mobile-header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;max-width:1440px;margin:0 auto;padding:1rem 2.5rem}
+@media(min-width:768px){.mobile-header-inner{padding:1rem 2.5rem}}
+.mobile-name{font-size:1.25rem;font-weight:600;letter-spacing:-0.04em;line-height:1.3}
+.mobile-subtitle{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--color-text-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ===== SECTION SHELL ===== */
+.section-shell{scroll-margin-top:5rem}
+.section-shell > div{padding:0;opacity:0;transform:translateY(26px);transition:opacity 0.7s ease-out,transform 0.7s ease-out}
+.section-shell > div.revealed{opacity:1;transform:translateY(0)}
+.section-title{font-size:clamp(1.55rem,3vw,2.2rem);letter-spacing:-0.03em;line-height:1.3}
+.body-copy{font-size:clamp(0.88rem,1.15vw,0.96rem);line-height:1.7;color:var(--color-text-secondary)}
+.body-copy-soft{font-size:clamp(0.78rem,1vw,0.84rem);line-height:1.6;color:var(--color-text-soft)}
+.meta-label{font-size:clamp(0.7rem,0.9vw,0.75rem);letter-spacing:0.10em;text-transform:uppercase;color:var(--color-text-soft)}
+.meta-label-accent{color:var(--color-text)}
+.stat-value{font-size:1.1rem;font-weight:600;line-height:1}
+
+/* ===== CYBERPUNK NEON GLOW & EFFECTS ===== */
+/* --- Background: circuit-grid + noise texture --- */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(176,0,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176,0,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+[data-theme="light"] body::before{
+  background-image:
+    linear-gradient(rgba(160,150,180,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,150,180,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+[data-theme="dark"] body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:0.15;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+}
+.page-wrapper{position:relative;z-index:1}
+
+/* --- Glitch offset decoration lines (dark only, subtle) --- */
+[data-theme="dark"] .section-shell::before{
+  content:'';position:absolute;top:2rem;right:0;width:60px;height:1px;
+  background:linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+  opacity:0.3;
+}
+[data-theme="dark"] .section-shell::after{
+  content:'';position:absolute;bottom:2rem;left:0;width:40px;height:1px;
+  background:linear-gradient(90deg, transparent, var(--color-magenta), transparent);
+  opacity:0.2;
+}
+.section-shell{position:relative}
+
+/* --- Hero title: triple neon glow cyan + magenta + purple --- */
+[data-theme="dark"] .hero-title{
+  text-shadow:
+    0 0 30px rgba(0,240,255,0.12),
+    0 0 60px rgba(0,240,255,0.06),
+    0 0 90px rgba(255,0,170,0.04),
+    0 0 120px rgba(176,0,255,0.02);
+}
+
+/* --- Thin neon border cards (glassmorphism) — electric blue + rose red gradient glow --- */
+[data-theme="dark"] .ui-card{
+  background: rgba(18,10,32,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,240,255,0.08);
+  box-shadow:
+    0 0 4px rgba(0,240,255,0.06),
+    0 0 12px rgba(255,0,170,0.04),
+    0 0 24px rgba(0,0,0,0.3),
+    inset 0 0 40px rgba(176,0,255,0.02);
+}
+[data-theme="dark"] .ui-card:hover{
+  border-color: rgba(255,0,170,0.15);
+  box-shadow:
+    0 0 6px rgba(0,240,255,0.10),
+    0 0 16px rgba(255,0,170,0.08),
+    0 0 32px rgba(176,0,255,0.04),
+    inset 0 0 30px rgba(255,0,170,0.02);
+  background: rgba(28,18,48,0.65);
+}
+[data-theme="dark"] .ui-card-quiet{
+  background: rgba(18,10,32,0.35);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0,240,255,0.06);
+}
+
+/* --- Panel glass --- */
+[data-theme="dark"] .ui-panel{
+  border: 1px solid rgba(0,240,255,0.06);
+  background: rgba(28,18,48,0.4);
+  backdrop-filter: blur(4px);
+}
+[data-theme="dark"] .ui-panel-muted{
+  border: 1px solid rgba(0,240,255,0.06);
+  background: rgba(18,10,32,0.25);
+}
+[data-theme="dark"] .ui-panel-muted2{
+  background: rgba(18,10,32,0.4);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,0,170,0.08);
+}
+
+/* --- Hero panels --- */
+[data-theme="dark"] .hero-panel{
+  border: 1px solid rgba(0,240,255,0.08);
+  background: rgba(18,10,32,0.45);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+[data-theme="dark"] .hero-panel-item{
+  background: rgba(28,18,48,0.4);
+  border: 1px solid rgba(255,0,170,0.06);
+  backdrop-filter: blur(4px);
+}
+
+/* --- Pill tags: magenta text, cyan border --- */
+[data-theme="dark"] .pill{
+  border-color: rgba(0,240,255,0.12);
+  background: rgba(18,10,32,0.5);
+  color: var(--color-magenta);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px rgba(0,240,255,0.03);
+}
+[data-theme="dark"] .pill:hover{
+  border-color: rgba(255,0,170,0.18);
+  box-shadow: 0 0 15px rgba(255,0,170,0.06);
+}
+
+/* --- Segmented control: dark mode --- */
+[data-theme="dark"] .segmented-button[data-active="true"]{
+  background: rgba(0,240,255,0.08);
+  color: #00f0ff;
+  box-shadow: 0 0 8px rgba(0,240,255,0.06);
+}
+
+/* --- Nav dash gradient: cyan → magenta → purple --- */
+[data-theme="dark"] .nav-item[data-active="true"] .nav-dash{
+  background: linear-gradient(90deg, #00f0ff, #ff00aa, #b000ff);
+  box-shadow: 0 0 10px rgba(0,240,255,0.3), 0 0 20px rgba(255,0,170,0.1);
+  width: 2.5rem;
+}
+
+/* --- Education timeline dot: cyan glow pulse --- */
+[data-theme="dark"] .edu-dot{
+  background: #00f0ff;
+  box-shadow: 0 0 12px rgba(0,240,255,0.5), 0 0 24px rgba(176,0,255,0.15);
+}
+
+/* --- Gallery indicators: magenta active --- */
+[data-theme="dark"] .indicator-button[data-active="true"]{
+  background: #ff00aa;
+  box-shadow: 0 0 8px rgba(255,0,170,0.5);
+}
+[data-theme="dark"] .control-button:hover{
+  border-color: rgba(0,240,255,0.25);
+  box-shadow: 0 0 15px rgba(176,0,255,0.12);
+}
+
+/* --- Buttons: dark mode --- */
+[data-theme="dark"] .ui-button-primary{
+  background: linear-gradient(135deg, #00f0ff, #0098cc);
+  color: #09090f;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(0,240,255,0.15), 0 0 40px rgba(176,0,255,0.04);
+  border: none;
+}
+[data-theme="dark"] .ui-button-primary:hover{
+  box-shadow: 0 0 35px rgba(0,240,255,0.30), 0 0 60px rgba(176,0,255,0.06);
+  transform: translateY(-1px);
+}
+[data-theme="dark"] .ui-button-secondary{
+  border: 1px solid rgba(0,240,255,0.15);
+  background: rgba(18,10,32,0.4);
+  backdrop-filter: blur(4px);
+}
+[data-theme="dark"] .ui-button-secondary:hover{
+  border-color: rgba(255,0,170,0.2);
+  background: rgba(28,18,48,0.5);
+  box-shadow: 0 0 15px rgba(255,0,170,0.06);
+}
+[data-theme="dark"] .ui-button-ghost:hover{
+  color: #00f0ff;
+}
+
+/* --- Bottom nav bar: frosted glass with cyan border --- */
+[data-theme="dark"] .bottom-nav{
+  border: 1px solid rgba(0,240,255,0.10);
+  background: rgba(18,10,32,0.75);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 0 30px rgba(0,0,0,0.4), 0 0 40px rgba(176,0,255,0.03);
+}
+
+/* --- Accent pill (e.g. awards count) --- */
+[data-theme="dark"] .pill[style*="background:var(--color-accent)"]{
+  background: linear-gradient(135deg, #ff00aa, #b000ff) !important;
+  box-shadow: 0 0 14px rgba(255,0,170,0.25), 0 0 28px rgba(176,0,255,0.10);
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* --- Mobile header: thin bottom border glow --- */
+[data-theme="dark"] .mobile-header{
+  border-bottom: 1px solid rgba(176,0,255,0.06);
+  box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+}
+
+/* ===== TOP NAV BAR ===== */
+.top-navbar{position:sticky;top:0;z-index:45;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;
+  padding:0 2.5rem;height:52px;overflow-x:auto;overflow-y:hidden;
+  background:rgba(13,8,24,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--color-border);
+  scrollbar-width:none}
+.top-navbar::-webkit-scrollbar{display:none}
+@media(max-width:1024px){.top-navbar{display:none}}
+@media(min-width:1024px){.top-navbar{padding:0 5rem}}
+.top-navbar .brand{display:flex;align-items:center;gap:0.6rem;flex-shrink:0}
+.top-navbar .brand-name{font-weight:700;font-size:1rem;letter-spacing:-0.03em;background:linear-gradient(135deg,var(--color-cyan),var(--color-magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.top-navbar .brand-sub{font-size:0.65rem;color:var(--color-text-soft);letter-spacing:0.12em;text-transform:uppercase}
+.top-nav-sections{display:flex;gap:0;flex-shrink:0}
+.top-nav-sections .nav-item{padding:0 0.7rem;min-height:2rem;gap:0;font-size:clamp(0.72rem,0.85vw,0.78rem)}
+.top-nav-sections .nav-item .nav-dash{display:none}
+.top-nav-sections .nav-item[data-active="true"]{color:var(--color-cyan)}
+[data-theme="light"] .top-navbar{background:rgba(250,245,236,0.78)}
+[data-theme="light"] .top-nav-sections .nav-item[data-active="true"]{color:var(--color-accent)}
+.top-navbar .nav-right{display:flex;align-items:center;gap:0.4rem;flex-shrink:0}
+.top-navbar .theme-toggle{display:flex;align-items:center;gap:0;background:var(--color-surface);border-radius:5px;padding:2px;border:1px solid var(--color-border)}
+.top-navbar .theme-toggle button{padding:0.2rem 0.35rem;font-size:0.65rem;border-radius:3px;color:var(--color-text-soft);display:flex;align-items:center;gap:0.15rem;transition:all 0.15s}
+.top-navbar .theme-toggle button[data-active="true"]{background:var(--color-bg);color:var(--color-text)}
+[data-theme="dark"] .top-navbar .theme-toggle button[data-active="true"]{color:var(--color-cyan);background:rgba(0,240,255,0.06)}
+.top-navbar .lang-toggle{display:flex;align-items:center;gap:0;background:var(--color-surface);border-radius:5px;padding:2px;border:1px solid var(--color-border)}
+.top-navbar .lang-toggle button{padding:0.2rem 0.35rem;font-size:0.65rem;border-radius:3px;color:var(--color-text-soft);display:flex;align-items:center;transition:all 0.15s}
+.top-navbar .lang-toggle button[data-active="true"]{background:var(--color-bg);color:var(--color-text)}
+[data-theme="dark"] .top-navbar .lang-toggle button[data-active="true"]{color:var(--color-cyan);background:rgba(0,240,255,0.06)}
+
+/* --- Footer border: gradient --- */
+[data-theme="dark"] .site-footer{
+  border-image: linear-gradient(90deg, transparent, rgba(176,0,255,0.10), rgba(255,0,170,0.06), transparent) 1;
+}
+
+/* --- Form controls --- */
+[data-theme="dark"] .form-control{
+  background: rgba(18,10,32,0.4);
+  border: 1px solid rgba(0,240,255,0.08);
+  color: #e8e4f0;
+}
+[data-theme="dark"] .form-control:focus{
+  border-color: rgba(0,240,255,0.3);
+  box-shadow: 0 0 15px rgba(0,240,255,0.06);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes neonPulse {
+  0%, 100% { opacity: 0.9; box-shadow: 0 0 12px rgba(0,240,255,0.4), 0 0 24px rgba(176,0,255,0.1); }
+  50% { opacity: 1; box-shadow: 0 0 20px rgba(0,240,255,0.6), 0 0 40px rgba(176,0,255,0.15); }
+}
+[data-theme="dark"] .edu-dot{
+  animation: neonPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glitchSkew {
+  0% { transform: skew(0deg); }
+  2% { transform: skew(0.5deg); }
+  4% { transform: skew(0deg); }
+  98% { transform: skew(0deg); }
+  99.5% { transform: skew(-0.3deg); }
+  100% { transform: skew(0deg); }
+}
+[data-theme="dark"] .hero-title{
+  animation: glitchSkew 8s ease-in-out infinite;
+}
+
+/* ===== LIGHT MODE: subtle cyberpunk ===== */
+.pill{
+  border-color: rgba(160,150,180,0.12);
+  background: var(--color-surface);
+  color: var(--color-magenta);
+}
+.ui-card{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  border: 1px solid var(--color-border);
+}
+.ui-card:hover{
+  border-color: rgba(180,150,200,0.20);
+  box-shadow: 0 2px 12px rgba(180,150,200,0.06);
+}
+.ui-button-primary{
+  background: linear-gradient(135deg, #4499cc, #3377aa);
+  color: #fff;
+  border: none;
+}
+.ui-button-primary:hover{
+  box-shadow: 0 0 20px rgba(68,153,204,0.20);
+  transform: translateY(-1px);
+}
+.ui-button-secondary{
+  border: 1px solid var(--color-border);
+}
+.segmented-button[data-active="true"]{
+  background: rgba(68,153,204,0.06);
+  color: #4499cc;
+}
+.nav-item[data-active="true"] .nav-dash{
+  background: var(--color-accent);
+  width: 2.5rem;
+}
+.indicator-button[data-active="true"]{
+  background: var(--color-accent-pink);
+}
+.control-button:hover{
+  border-color: rgba(160,150,180,0.25);
+  box-shadow: 0 0 10px rgba(68,153,204,0.08);
+}
+.bottom-nav{
+  background: rgba(245,240,232,0.80);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(160,150,180,0.12);
+  box-shadow: 0 0 20px rgba(0,0,0,0.04);
+}
+.pill[style*="background:var(--color-accent)"]{
+  background: linear-gradient(135deg, #dd77aa, #b088d0) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* ===== HERO ===== */
+.hero-grid{display:grid;gap:2.5rem}
+@media(min-width:1280px){.hero-grid{grid-template-columns:1.08fr 0.92fr}}
+.hero-title{font-size:clamp(3.8rem,7vw,5.5rem);letter-spacing:-0.06em;line-height:1}
+.hero-desc{font-size:clamp(1.16rem,1.85vw,1.72rem);font-weight:500;line-height:1.62;letter-spacing:-0.018em;max-width:24ch}
+.pill{display:inline-flex;align-items:center;gap:0.35rem;padding:0.3rem 0.7rem;border-radius:999px;font-size:clamp(0.72rem,0.9vw,0.78rem);border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text-secondary)}
+.hero-panel{border-radius:var(--radius-xl);padding:1.75rem 1.5rem;background:var(--color-surface);border:1px solid var(--color-border)}
+@media(min-width:768px){.hero-panel{padding:2rem}}
+.hero-panel-item{border-radius:var(--radius-lg);padding:1rem;background:var(--color-surface-elevated)}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;gap:2.5rem;grid-template-columns:1fr;align-items:center}
+@media(min-width:1024px){.about-grid{grid-template-columns:minmax(0,0.95fr) minmax(280px,0.55fr)}}
+.about-portrait-card{position:relative;overflow:hidden;border-radius:var(--radius-xl);border:1px solid var(--color-border-strong);background:var(--color-surface);box-shadow:0 20px 80px rgba(0,0,0,0.18)}
+.about-portrait-card::before{content:'';position:absolute;inset:-1px;z-index:1;pointer-events:none;background:linear-gradient(135deg,rgba(0,240,255,0.22),transparent 34%,rgba(255,0,170,0.18));mix-blend-mode:screen;opacity:0.7}
+.about-portrait-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;filter:saturate(1.05) contrast(1.03)}
+.about-portrait-caption{position:absolute;left:1rem;right:1rem;bottom:1rem;z-index:2;border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.75rem 0.9rem;background:rgba(13,8,24,0.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+[data-theme="light"] .about-portrait-caption{background:rgba(250,245,236,0.72)}
+
+/* ===== BUTTONS ===== */
+.ui-button{display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.6rem 1.2rem;border-radius:var(--radius-sm);font-size:clamp(0.82rem,1.05vw,0.88rem);font-weight:500;transition:all 0.2s;white-space:nowrap;border:1px solid var(--color-border)}
+.ui-button-secondary{background:transparent;color:var(--color-text)}
+.ui-button-secondary:hover{background:var(--color-surface)}
+.ui-button-ghost{color:var(--color-text-soft)}
+.ui-button-ghost:hover{color:var(--color-text)}
+.ui-button-compact{padding:0.4rem 0.8rem;font-size:0.75rem}
+
+/* ===== CARDS ===== */
+.ui-card{border-radius:var(--radius-xl);border:1px solid var(--color-border);padding:1.75rem 1.5rem;background:var(--color-surface);transition:all 0.3s}
+.ui-card:hover{background:var(--color-surface-elevated)}
+@media(min-width:768px){.ui-card{padding:2rem}}
+.ui-card-quiet{border-radius:var(--radius-xl);border:1px solid var(--color-border);padding:1.75rem 1.5rem;background:transparent}
+.ui-panel{border-radius:var(--radius-lg);padding:0.8rem 1rem;background:var(--color-surface-elevated)}
+.ui-panel-muted{border-radius:var(--radius-lg);padding:0.8rem 1rem;background:transparent;border:1px solid var(--color-border)}
+.ui-panel-muted2{border-radius:var(--radius-lg);padding:1rem 1.25rem;background:var(--color-surface);border:1px solid var(--color-border)}
+
+/* ===== MEDIA CAROUSEL ===== */
+.media-carousel{overflow:hidden}
+.media-carousel-track{display:flex;gap:0.75rem;transition:transform 0.4s ease-out;touch-action:pan-y pinch-zoom}
+.media-carousel-slide{flex:0 0 78%;min-width:0;position:relative;border-radius:var(--radius-md);overflow:hidden}
+@media(min-width:640px){.media-carousel-slide{flex:0 0 67%}}
+@media(min-width:1024px){.media-carousel-slide{flex:0 0 59%}}
+.media-aspect{aspect-ratio:1.42/1;position:relative;overflow:hidden;background:var(--color-surface-elevated)}
+.media-aspect img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:all 0.3s ease-out}
+.media-gradient{pointer-events:none;position:absolute;inset:0;background:linear-gradient(to top, color-mix(in oklab, var(--color-bg) 24%, transparent), transparent);opacity:0.8}
+.indicator-button{width:0.45rem;height:0.45rem;border-radius:999px;background:var(--color-text-soft);border:none;padding:0;transition:all 0.3s}
+.indicator-button[data-active="true"]{width:1rem;background:var(--color-accent)}
+.control-button{display:flex;align-items:center;justify-content:center;width:1.8rem;height:1.8rem;border-radius:999px;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text-soft);transition:all 0.2s}
+.control-button:hover{background:var(--color-surface-elevated);color:var(--color-text)}
+
+/* ===== EXPERIENCE CAROUSEL ===== */
+.exp-carousel-slide{flex:0 0 74%;min-width:0;position:relative;border-radius:var(--radius-md);overflow:hidden}
+@media(min-width:640px){.exp-carousel-slide{flex:0 0 38%}}
+@media(min-width:1280px){.exp-carousel-slide{flex:0 0 29%}}
+.exp-media-aspect{aspect-ratio:1.22/1;position:relative;overflow:hidden;background:var(--color-surface-elevated);border-radius:var(--radius-md)}
+.exp-media-aspect img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ===== EDUCATION ===== */
+.edu-timeline{position:relative;display:grid;gap:1.5rem}
+.edu-timeline::before{content:'';position:absolute;bottom:1rem;left:0.5rem;top:1rem;width:1px;background:var(--color-border)}
+.edu-card{position:relative;display:grid;gap:0.75rem;border-radius:var(--radius-xl);border:1px solid var(--color-border);background:var(--color-surface);padding:1.5rem}
+@media(min-width:768px){.edu-card{grid-template-columns:0.55fr 1fr;padding:1.5rem}}
+.edu-dot{position:absolute;left:0.5rem;top:1.75rem;width:0.75rem;height:0.75rem;border-radius:999px;background:var(--color-accent);transform:translateX(-50%)}
+.edu-content{padding-left:1rem}
+
+/* ===== FORM ===== */
+.form-group{margin-top:1rem}
+.form-label{display:block;font-size:clamp(0.7rem,0.9vw,0.75rem);letter-spacing:0.10em;text-transform:uppercase;color:var(--color-text-soft);margin-bottom:0.4rem}
+.form-control{width:100%;padding:0.7rem 0.9rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);font-size:0.9rem;outline:none;transition:border-color 0.2s}
+.form-control:focus{border-color:var(--color-text)}
+.form-control--textarea{resize:vertical;min-height:5rem}
+
+/* ===== FOOTER ===== */
+.site-footer{border-top:1px solid var(--color-border);padding:1.5rem 0 3.5rem;font-size:0.82rem;color:var(--color-text-soft)}
+
+/* ===== BOTTOM NAV MOBILE ===== */
+.bottom-nav-wrapper{position:fixed;inset-x:0;bottom:1.25rem;z-index:30;display:flex;justify-content:center;padding:0 2.5rem}
+@media(min-width:1024px){.bottom-nav-wrapper{display:none}}
+.bottom-nav{pointer-events:auto;display:inline-flex;align-items:center;gap:0.5rem;padding:0.3rem;border-radius:999px;border:1px solid var(--color-border);background:color-mix(in oklab, var(--color-surface-elevated) 76%, transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+
+/* ===== SCROLLBAR ===== */
+.scrollbar-none::-webkit-scrollbar{display:none}
+.scrollbar-none{-ms-overflow-style:none;scrollbar-width:none}
+
+/* ===== RESPONSIVE GAPS ===== */
+.main-content{display:flex;flex-direction:column;gap:4.5rem;padding-bottom:2.5rem}
+@media(min-width:1024px){.main-content{gap:7rem;padding-top:3.5rem}}
+
+/* ===== PHOTO PLACEHOLDER BG ===== */
+.placeholder-img{background:linear-gradient(135deg, var(--color-surface-elevated) 0%, var(--color-surface) 100%);display:flex;align-items:center;justify-content:center;color:var(--color-text-soft);font-size:0.8rem}
+
+/* ===== DYNAMIC CYBERPUNK BG CANVAS ===== */
+#cyberBg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.7}
+[data-theme="light"] #cyberBg{opacity:0.3}
+</style>
+</head>
+<body>
+<canvas id="cyberBg"></canvas>
+<!-- TOP NAV BAR (desktop) -->
+<div class="top-navbar">
+  <div class="brand">
+    <span class="brand-name">任思雨</span>
+    <span class="brand-sub">AI PRODUCT MANAGER</span>
+  </div>
+  <nav class="top-nav-sections" id="topNav"></nav>
+  <div class="nav-right">
+    <div class="theme-toggle" role="group">
+      <button data-active="true" data-theme-btn="dark" type="button">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 5h4"/><path d="M20 3v4"/><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+        Dark
+      </button>
+      <button data-active="false" data-theme-btn="light" type="button">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 3v1"/><path d="M12 20v1"/><path d="M3 12h1"/><path d="M20 12h1"/><path d="m18.364 5.636-.707.707"/><path d="m6.343 17.657-.707.707"/></svg>
+        Light
+      </button>
+    </div>
+    <div class="lang-toggle" role="group">
+      <button data-active="true" data-lang-btn="zh" type="button">中文</button>
+      <button data-active="false" data-lang-btn="en" type="button">EN</button>
+    </div>
+  </div>
+</div>
+<div class="page-wrapper">
+
+<!-- MOBILE HEADER -->
+<div class="mobile-header">
+  <div class="mobile-header-inner">
+    <div style="display:flex;flex-direction:column;min-width:0">
+      <span class="mobile-name">任思雨</span>
+      <span class="mobile-subtitle">AI 产品经理</span>
+    </div>
+    <button id="mobileMenuBtn" aria-label="Open navigation" style="display:inline-flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);background:transparent">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </button>
+  </div>
+  <!-- Mobile drawer menu -->
+  <div id="mobileDrawer" class="hidden" style="position:fixed;inset:0;z-index:50;background:var(--color-bg);padding:1.5rem;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem">
+      <span style="font-size:1.1rem;font-weight:600">导航</span>
+      <button id="closeDrawerBtn" style="width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);border:1px solid var(--color-border)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.5rem" id="mobileNavLinks"></div>
+    <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem">
+      <div style="display:flex;gap:1rem;align-items:center">
+        <div class="segmented-control" role="group" aria-label="Theme switcher" data-compact="true">
+          <button class="segmented-button" data-active="true" data-theme-btn="dark" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5h4"/><path d="M20 3v4"/><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+            Dark
+          </button>
+          <button class="segmented-button" data-active="false" data-theme-btn="light" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 3v1"/><path d="M12 20v1"/><path d="M3 12h1"/><path d="M20 12h1"/><path d="m18.364 5.636-.707.707"/><path d="m6.343 17.657-.707.707"/><path d="m5.636 5.636.707.707"/><path d="m17.657 17.657.707.707"/></svg>
+            Light
+          </button>
+        </div>
+        <div class="segmented-control" role="group" aria-label="Language switcher" data-compact="true">
+          <span class="segmented-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+          </span>
+          <button class="segmented-button" data-active="true" data-lang-btn="zh" type="button">中文</button>
+          <button class="segmented-button" data-active="false" data-lang-btn="en" type="button">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-grid">
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+
+<!-- ===== HERO ===== -->
+<section class="section-shell" style="min-height:72vh;padding-top:1rem">
+  <div class="hero-grid" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1.75rem">
+      <div>
+        <span class="eyebrow">AI Product Manager</span>
+        <div style="margin-top:1rem">
+          <p style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--color-text-soft);margin-bottom:0.75rem">AI 产品经理｜交互与体验设计研究生</p>
+          <h1 class="hero-title">任思雨</h1>
+          <p class="hero-desc" style="margin-top:0.75rem">依托本科工科基底与研究生系统体验思维，同时叠加AI产品实习落地经验，我能够兼顾技术可行性与用户真实需求。</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>AI Product</span>
+        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg>Design x Product</span>
+        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Built with Codex</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
+        <button class="ui-button ui-button-primary" onclick="document.getElementById('selected-projects').scrollIntoView({behavior:'smooth'})">查看项目</button>
+        <a class="ui-button ui-button-secondary" href="/files/yuhang-resume.pdf" download>下载简历</a>
+        <button class="ui-button ui-button-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">联系我</button>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem">
+      <div class="hero-panel">
+        <p class="meta-label meta-label-accent">聚焦 AI 应用、Agent 产品与体验驱动的产品设计</p>
+        <div style="margin-top:1.25rem;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+          <div class="hero-panel-item"><p class="meta-label">当前身份</p><p class="body-copy" style="margin-top:0.5rem">江南大学设计学院研究生</p></div>
+          <div class="hero-panel-item"><p class="meta-label">求职方向</p><p class="body-copy" style="margin-top:0.5rem">AI 产品经理 / Agent 产品</p></div>
+          <div class="hero-panel-item"><p class="meta-label">毕业时间</p><p class="body-copy" style="margin-top:0.5rem">2027 年 7 月</p></div>
+        </div>
+      </div>
+      <div class="hero-panel" style="display:grid;gap:0.75rem">
+        <p class="meta-label meta-label-accent">我能为团队带来的价值</p>
+        <div style="display:flex;align-items:start;gap:0.6rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.35rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p class="body-copy">把复杂 AI 能力整理成可理解、可执行的产品路径。</p></div>
+        <div style="display:flex;align-items:start;gap:0.6rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.35rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p class="body-copy">兼顾体验细节、产品结构与跨角色协同推进。</p></div>
+        <div style="display:flex;align-items:start;gap:0.6rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.35rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p class="body-copy">能够在 0-1 场景中快速形成方案并持续迭代落地。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section-shell" id="about">
+  <div class="about-grid" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;min-width:0">
+      <div style="max-width:44rem">
+        <span class="eyebrow">ABOUT ME</span>
+        <h2 class="section-title" style="max-width:18ch;margin-top:1rem">设计训练、AI 产品实践与项目推进能力，是我当前最稳定的能力组合</h2>
+        <p class="body-copy" style="max-width:41ch;margin-top:0.75rem">我希望加入重视产品结构、用户体验与落地效率的团队，持续深耕 AI 应用与 Agent 产品。</p>
+      </div>
+      <div class="ui-card-quiet" style="background:var(--color-surface);padding:1.5rem">
+        <p class="body-copy" style="line-height:1.8">从工科工业设计到交互体验设计，再到 AI 产品实习实践，我更习惯把“用户真实需求”“技术可行边界”和“产品落地路径”放在同一个框架里思考。</p>
+      </div>
+    </div>
+    <figure class="about-portrait-card">
+      <img src="https://dwz.cn/oz1R9ETx" alt="任思雨个人照片" loading="lazy"/>
+      <figcaption class="about-portrait-caption">
+        <p class="meta-label meta-label-accent">Product / Experience / AI</p>
+        <p class="body-copy-soft" style="margin-top:0.35rem;color:var(--color-text-secondary)">保持好奇，也保持把想法落成产品的耐心。</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== THREE PILLARS ===== -->
+<div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))" data-reveal>
+  <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+    <span class="stat-value" style="color:var(--color-accent);font-size:1.5rem">01</span>
+    <h3 style="font-size:1.05rem;font-weight:500;margin-top:0.5rem">设计背景</h3>
+    <p class="body-copy" style="margin-top:0.5rem">工业设计训练让我更敏感于体验、信息表达与落地细节。</p>
+  </div>
+  <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+    <span class="stat-value" style="color:var(--color-accent);font-size:1.5rem">02</span>
+    <h3 style="font-size:1.05rem;font-weight:500;margin-top:0.5rem">AI 产品方向</h3>
+    <p class="body-copy" style="margin-top:0.5rem">关注 AI 应用与 Agent 产品，把模型能力转成可执行、可追踪的工作流。</p>
+  </div>
+  <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+    <span class="stat-value" style="color:var(--color-accent);font-size:1.5rem">03</span>
+    <h3 style="font-size:1.05rem;font-weight:500;margin-top:0.5rem">工作方式</h3>
+    <p class="body-copy" style="margin-top:0.5rem">习惯先拆问题与边界，再推进方案、细节与协作节奏。</p>
+  </div>
+</div>
+
+<!-- ===== EDUCATION ===== -->
+<section class="section-shell" id="education">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>Education</span>
+      <div style="max-width:100%">
+        <h2 class="section-title" style="max-width:28ch">工科工业设计基底搭配交互体验设计体系，构筑我的完整产品方法论</h2>
+      </div>
+    </div>
+
+    <!-- Narrative description -->
+    <div style="display:grid;gap:1.5rem;grid-template-columns:1fr">
+      <div class="ui-card-quiet" style="padding:2rem;background:var(--color-surface);border-color:var(--color-border-strong)">
+        <p class="body-copy" style="font-size:clamp(0.92rem,1.2vw,1rem);line-height:1.8;color:var(--color-text-secondary);max-width:75ch">
+          本科工科工业设计塑造工程落地思维，研究生深耕交互体验打磨用户洞察能力，叠加三段产品实习经历（包含AI产品专项实战），融合用户体验、产品策略与技术落地多元视角，成为我深耕AI产品赛道的核心竞争优势。
+        </p>
+      </div>
+    </div>
+
+    <!-- Education entries -->
+    <div class="edu-timeline">
+      <div class="edu-card">
+        <span class="edu-dot"></span>
+        <div class="edu-content" style="display:grid;gap:0.5rem">
+          <p class="meta-label meta-label-accent" style="font-size:clamp(0.78rem,1vw,0.84rem)">2024.09 - 2027.07</p>
+          <h3 style="font-size:1.25rem;font-weight:600">江南大学</h3>
+          <p style="color:var(--color-text-secondary)">设计学院 · 交互与体验设计方向 · 研究生</p>
+        </div>
+      </div>
+      <div class="edu-card">
+        <span class="edu-dot"></span>
+        <div class="edu-content" style="display:grid;gap:0.5rem">
+          <p class="meta-label meta-label-accent" style="font-size:clamp(0.78rem,1vw,0.84rem)">2020.09 - 2024.06</p>
+          <h3 style="font-size:1.25rem;font-weight:600">南京林业大学</h3>
+          <p style="color:var(--color-text-secondary)">家居与工业设计学院 · 工业设计专业（工科） · 本科</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section class="section-shell" id="experience">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>Experience</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">近两年的实习与项目经历，集中在 AI 产品与体验落地</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">从任务型 AI 工作台、企业级 AI 助手，到无障碍体验策划，我持续在不同场景里验证自己的产品方法与协作能力。</p>
+      </div>
+    </div>
+
+    <!-- Baidu -->
+    <div style="display:grid;gap:1.5rem">
+      <article class="ui-card">
+        <div style="display:grid;gap:1.5rem">
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div>
+              <p class="meta-label meta-label-accent">2026.02 - 2026.05</p>
+              <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">Keeta（出海外卖）</h3>
+              <p style="display:inline-flex;align-items:center;gap:0.5rem;font-size:var(--text-small);color:var(--color-text-secondary);margin-top:0.3rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>产品经理</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+              <span class="pill">营销平台</span>
+              <span class="pill">优惠券系统</span>
+              <span class="pill">风控策略</span>
+              <span class="pill">多语种适配</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.25rem">
+            <div>
+              <p class="meta-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg> Projects</p>
+              <div style="display:grid;gap:0.5rem;margin-top:0.5rem">
+                <div class="ui-panel"><p style="font-size:var(--text-small);color:var(--color-text-secondary)">营销平台优惠券系统</p></div>
+              </div>
+            </div>
+            <p class="body-copy">全权负责营销优惠券配置端、C 端用户交易侧、优惠券及兑换码风控需求，以及营销平台的搭建工作。</p>
+            <div style="display:grid;gap:0.75rem">
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">优惠券配置项优化：优化优惠券领取、使用规则配置能力，新增周期限领与按星期使用功能，落地后台配置与全 C 端交互改造。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">风控与安全保障：针对兑换码场景，梳理全链路风险节点，制定标准化接口校验规则与风控阈值，拦截异常调用与参数错配问题。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">大客户定制化需求与营销平台搭建：打通双方系统数据映射链路，重构营销平台首页，搭建角色场景化统一入口，实现页面全语种适配。</p></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- NetEase Media -->
+      <article class="ui-card">
+        <div style="display:grid;gap:1.5rem">
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div>
+              <p class="meta-label meta-label-accent">2025.10 - 2026.01</p>
+              <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">网易传媒北京有限公司</h3>
+              <p style="display:inline-flex;align-items:center;gap:0.5rem;font-size:var(--text-small);color:var(--color-text-secondary);margin-top:0.3rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>AI 产品经理</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+              <span class="pill">端云协同</span>
+              <span class="pill">多模态 AI</span>
+              <span class="pill">0-1 落地</span>
+              <span class="pill">社区产品</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.25rem">
+            <div>
+              <p class="meta-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg> Projects</p>
+              <div style="margin-top:0.5rem">
+                <div class="ui-panel"><p style="font-size:var(--text-small);color:var(--color-text-secondary)">网易小蜜蜂｜AI 记录项目</p></div>
+              </div>
+            </div>
+            <p class="body-copy">针对减少平台内容流失、增强用户粘性需求，打造 AI 随心记核心工具。采用端上小模型 + 云端大模型混合方案，完成图片结构化整理与轻量化发布，设计标签体系优化内容分发。</p>
+            <div style="display:grid;gap:0.75rem">
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">搭建全链路数据监控体系，落地勋章、抽奖等激励玩法驱动用户活跃与内容生产。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">设计隐私授权弹窗，在轻量记录体验与数据合规要求之间取得平衡。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">最终实现月功能渗透率 28%、曝光发布率 22%，月留存提升 40%，带动 APP 大盘留存上涨 21 个百分点。</p></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- vivo -->
+      <article class="ui-card">
+        <div style="display:grid;gap:1.5rem">
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div>
+              <p class="meta-label meta-label-accent">2025.06 - 2025.10</p>
+              <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">维沃通信（vivo）互联网内容分发事业部</h3>
+              <p style="display:inline-flex;align-items:center;gap:0.5rem;font-size:var(--text-small);color:var(--color-text-secondary);margin-top:0.3rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>中后台数据产品</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+              <span class="pill">用户&内容双圈选分析平台</span>
+              <span class="pill">0-1 数据工具</span>
+              <span class="pill">业务提效</span>
+              <span class="pill">内容质量提升</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.25rem">
+            <div>
+              <p class="meta-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg> Projects</p>
+              <div style="margin-top:0.5rem">
+                <div class="ui-panel"><p style="font-size:var(--text-small);color:var(--color-text-secondary)">用户&内容双圈选分析平台｜数据自助分析工具</p></div>
+              </div>
+            </div>
+            <p class="body-copy">针对平台短视频用户粘性不足、内容供给结构失衡、运营依赖人工找数、策略迭代滞后痛点，0-1 搭建用户圈选分析 + 内容圈选分析双中台工具，覆盖浏览器、短视频、负一屏等全生态场景。</p>
+            <div style="display:grid;gap:0.75rem">
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">人群侧采用 Bitmap 异步计算架构，支持画像、城市、消费行为多维度自定义圈选，并自动输出垂类 / 场景 / 人群交叉画像可视化报表。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">素材侧提供批量 ID、补货订单两套圈选模式，搭建入库 - 分发 - 冷启 - 爆款全链路转化漏斗与内容质量评估体系。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">创新设计异步任务计算方案缓解服务器算力压力，统一全业务线数据指标口径，配套消息通知、自定义报表模板与批量内容下架能力。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">最终将运营分析周期从天级压缩至分钟级，人工取数工作量减少 80% 以上，项目年化 ROI 超 56%，平台内容爆款率提升 18%。</p></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Livat -->
+      <article class="ui-card">
+        <div style="display:grid;gap:1.5rem">
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div>
+              <p class="meta-label meta-label-accent">2025.02 - 2025.05</p>
+              <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">无锡荟聚</h3>
+              <p style="display:inline-flex;align-items:center;gap:0.5rem;font-size:var(--text-small);color:var(--color-text-secondary);margin-top:0.3rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>项目核心成员</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+              <span class="pill">服务体验</span>
+              <span class="pill">共创策划</span>
+              <span class="pill">线下落地</span>
+              <span class="pill">跨团队协同</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.25rem">
+            <div>
+              <p class="meta-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg> Projects</p>
+              <div style="margin-top:0.5rem">
+                <div class="ui-panel"><p style="font-size:var(--text-small);color:var(--color-text-secondary)">春风好轻松｜盲健共创市集策划项目</p></div>
+              </div>
+            </div>
+            <p class="body-copy">围绕盲健共创主题参与项目策划与落地，从服务体验与活动机制角度组织线下方案。</p>
+            <div style="display:grid;gap:0.75rem">
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">参与项目主题定义、场景设计与执行方案梳理，推动活动机制更清晰可落地。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">在共创与无障碍视角下优化参与体验，让活动叙事更有温度与可理解性。</p></div>
+              <div class="ui-panel-muted" style="display:flex;align-items:start;gap:0.75rem"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:0.25rem;flex-shrink:0;color:var(--color-accent)"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><p style="font-size:var(--text-small);color:var(--color-text-secondary);line-height:1.75">协同多方资源推进项目落地，强化从概念到执行的闭环能力。</p></div>
+            </div>
+            <!-- Livat gallery -->
+            <div style="border-top:1px solid color-mix(in oklab, var(--color-border) 82%, transparent);padding-top:1.25rem">
+              <div class="media-carousel" data-gallery="livat">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:0.75rem">
+                  <div style="display:flex;align-items:center;gap:0.75rem">
+                    <span class="meta-label">现场补充</span>
+                    <span class="meta-label" id="livatGalleryCounter">01 / 05</span>
+                  </div>
+                  <div style="display:flex;gap:0.25rem">
+                    <button class="control-button" data-gallery-prev="livat" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+                    <button class="control-button" data-gallery-next="livat" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+                  </div>
+                </div>
+                <div style="margin-top:0.75rem;overflow:hidden">
+                  <div class="media-carousel-track" id="livatGalleryTrack" style="gap:0.75rem">
+                    <div class="exp-carousel-slide"><div class="exp-media-aspect placeholder-img">📷 荟聚 1</div><div class="media-gradient"></div></div>
+                    <div class="exp-carousel-slide"><div class="exp-media-aspect placeholder-img">📷 荟聚 2</div><div class="media-gradient"></div></div>
+                    <div class="exp-carousel-slide"><div class="exp-media-aspect placeholder-img">📷 荟聚 3</div><div class="media-gradient"></div></div>
+                    <div class="exp-carousel-slide"><div class="exp-media-aspect placeholder-img">📷 荟聚 4</div><div class="media-gradient"></div></div>
+                    <div class="exp-carousel-slide"><div class="exp-media-aspect placeholder-img">📷 荟聚 5</div><div class="media-gradient"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SELECTED PROJECTS ===== -->
+<section class="section-shell" id="selected-projects" style="padding-top:1.5rem">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg>Selected Projects</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">代表性的三类项目实践</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">覆盖出海营销平台、AI 记录工具与无障碍体验策划，呈现从平台搭建到用户体验落地的多类实践。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem">
+      <!-- Project 1: 重点案例 -->
+      <div class="ui-card" id="selected-project-keeta-coupon">
+        <div style="display:grid;gap:1.5rem">
+          <div class="ui-panel-muted2" style="display:inline-flex;align-items:center;gap:0.5rem;align-self:start;padding:0.3rem 0.8rem;border-radius:999px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"/></svg>
+            <span class="meta-label">重点案例</span>
+          </div>
+          <div>
+            <p class="meta-label meta-label-accent">Keeta｜2026.02 - 2026.05</p>
+            <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">营销平台优惠券系统</h3>
+            <p class="body-copy" style="margin-top:0.5rem">面向出海外卖业务的营销平台建设，覆盖优惠券配置端、C 端交易侧、兑换码风控与大客户定制化需求。</p>
+          </div>
+          <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+            <div><p class="meta-label" style="margin-bottom:0.3rem">项目背景</p><p class="body-copy" style="font-size:var(--text-small)">业务需要提升营销活动配置效率，并保障 C 端优惠券领取、使用、兑换码核销链路的稳定与安全。</p></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">我的职责</p><p class="body-copy" style="font-size:var(--text-small)">作为产品经理，全权负责营销优惠券配置端、C 端用户交易侧、优惠券及兑换码风控需求，以及营销平台搭建。</p></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">关键动作</p><div style="display:grid;gap:0.3rem"><p class="body-copy" style="font-size:var(--text-small)">优化优惠券领取、使用规则配置能力，新增周期限领与按星期使用功能。</p><p class="body-copy" style="font-size:var(--text-small)">梳理兑换码全链路风险节点，制定接口校验规则与风控阈值。</p><p class="body-copy" style="font-size:var(--text-small)">打通大客户系统数据映射链路，重构营销平台首页与角色场景化入口。</p></div></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">阶段结果</p><div style="display:grid;gap:0.3rem"><p class="body-copy" style="font-size:var(--text-small)">落地后台配置与全 C 端交互改造。</p><p class="body-copy" style="font-size:var(--text-small)">拦截异常调用与参数错配问题，提升兑换码场景安全性。</p><p class="body-copy" style="font-size:var(--text-small)">实现营销平台页面全语种适配，支撑海外多市场使用。</p></div></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;justify-content:space-between">
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+              <span class="pill" style="background:var(--color-accent);color:var(--color-bg);border-color:var(--color-accent)">优惠券系统</span>
+              <span class="pill" style="background:var(--color-accent);color:var(--color-bg);border-color:var(--color-accent)">兑换码风控</span>
+              <span class="pill">营销平台</span>
+              <span class="pill">多语种适配</span>
+            </div>
+            <button class="ui-button ui-button-secondary ui-button-compact" onclick="alert('完整案例页面开发中')">查看完整案例</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: NetEase Bee -->
+      <div class="ui-card" id="selected-project-netease-bee">
+        <div style="display:grid;gap:1.5rem">
+          <div class="ui-panel-muted2" style="display:inline-flex;align-items:center;gap:0.5rem;align-self:start;padding:0.3rem 0.8rem;border-radius:999px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M18.5 6.5 16 9"/><path d="M21 13h-3"/><path d="M6 13H3"/><path d="M8 9 5.5 6.5"/><path d="M12 21a6 6 0 0 0 6-6c0-3.31-2.69-6-6-6s-6 2.69-6 6a6 6 0 0 0 6 6Z"/></svg>
+            <span class="meta-label">AI 记录工具</span>
+          </div>
+          <div>
+            <p class="meta-label meta-label-accent">网易传媒｜2025.10 - 2026.01</p>
+            <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">网易小蜜蜂｜AI 记录项目</h3>
+            <p class="body-copy" style="margin-top:0.5rem">围绕减少平台内容流失、增强用户粘性，打造 AI 随心记核心工具，验证低门槛 AI 工具提升社区产品留存的路径。</p>
+          </div>
+          <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+            <div><p class="meta-label" style="margin-bottom:0.3rem">项目背景</p><p class="body-copy" style="font-size:var(--text-small)">平台需要降低用户记录与发布门槛，减少内容流失，并增强社区产品的持续使用粘性。</p></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">我的职责</p><p class="body-copy" style="font-size:var(--text-small)">作为 AI 产品经理，推进端上小模型 + 云端大模型混合方案下的 AI 记录工具 0-1 落地。</p></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">关键动作</p><div style="display:grid;gap:0.3rem"><p class="body-copy" style="font-size:var(--text-small)">完成图片结构化整理与轻量化发布链路设计。</p><p class="body-copy" style="font-size:var(--text-small)">设计标签体系优化内容分发，并搭建全链路数据监控。</p><p class="body-copy" style="font-size:var(--text-small)">落地勋章、抽奖等激励玩法，并设计隐私授权弹窗平衡体验与合规。</p></div></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">阶段结果</p><div style="display:grid;gap:0.3rem"><p class="body-copy" style="font-size:var(--text-small)">月功能渗透率 28%，曝光发布率 22%。</p><p class="body-copy" style="font-size:var(--text-small)">月留存提升 40%，带动 APP 大盘留存上涨 21 个百分点。</p><p class="body-copy" style="font-size:var(--text-small)">验证低门槛 AI 工具提升用户粘性的落地路径。</p></div></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+            <span class="pill">端云协同</span>
+            <span class="pill">多模态 AI</span>
+            <span class="pill">0-1 落地</span>
+            <span class="pill">社区产品</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: 春风好轻松 -->
+      <div class="ui-card" id="selected-project-spring-breeze">
+        <div style="display:grid;gap:1.5rem">
+          <div class="ui-panel-muted2" style="display:inline-flex;align-items:center;gap:0.5rem;align-self:start;padding:0.3rem 0.8rem;border-radius:999px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span class="meta-label">体验策划</span>
+          </div>
+          <div>
+            <p class="meta-label meta-label-accent">无锡荟聚｜2025.02 - 2025.05</p>
+            <h3 style="font-size:var(--text-card-title);font-weight:600;margin-top:0.25rem">春风好轻松｜盲健共创市集策划项目</h3>
+            <p class="body-copy" style="margin-top:0.5rem">围绕盲健共创主题的市集策划项目，将品牌叙事、无障碍体验与线下执行组织在同一场景中。</p>
+          </div>
+          <div style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+            <div><p class="meta-label" style="margin-bottom:0.3rem">项目背景</p><p class="body-copy" style="font-size:var(--text-small)">项目强调公共活动中的包容性体验，以及品牌表达与社会议题之间的连接方式。</p></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">我的职责</p><p class="body-copy" style="font-size:var(--text-small)">作为项目核心成员，参与主题定义、场景设计、活动机制与现场落地协同。</p></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">关键动作</p><div style="display:grid;gap:0.3rem"><p class="body-copy" style="font-size:var(--text-small)">从盲健共创视角重组活动叙事与参与路径。</p><p class="body-copy" style="font-size:var(--text-small)">兼顾品牌表达、参与者触点与无障碍体验细节。</p><p class="body-copy" style="font-size:var(--text-small)">协同多方资源推进活动方案落地。</p></div></div>
+            <div><p class="meta-label" style="margin-bottom:0.3rem">阶段结果</p><div style="display:grid;gap:0.3rem"><p class="body-copy" style="font-size:var(--text-small)">提升活动的可理解性、参与感与现场体验完整度。</p><p class="body-copy" style="font-size:var(--text-small)">让品牌表达与社会议题形成更清晰的连接。</p><p class="body-copy" style="font-size:var(--text-small)">成为我作品集中较具代表性的社会创新项目之一。</p></div></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+            <span class="pill">无障碍体验</span>
+            <span class="pill">品牌叙事</span>
+            <span class="pill">多方协同</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section class="section-shell" id="skills">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>Skills</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">能力结构</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">当前能力组合主要围绕产品、AI、数据、设计与协作工具五个维度展开。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+        <div style="display:flex;align-items:center;gap:0.75rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><h3 style="font-size:1.05rem;font-weight:500">产品能力</h3></div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+          <span class="pill">用户研究</span><span class="pill">需求分析</span><span class="pill">PRD 撰写</span><span class="pill">信息架构</span><span class="pill">高保真原型</span><span class="pill">项目推进</span>
+        </div>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+        <div style="display:flex;align-items:center;gap:0.75rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg><h3 style="font-size:1.05rem;font-weight:500">AI 产品能力</h3></div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+          <span class="pill">Agent 产品理解</span><span class="pill">RAG 相关认知</span><span class="pill">多步任务型产品设计</span><span class="pill">Prompt 协作</span><span class="pill">AI 功能测试与反馈闭环</span><span class="pill">数据飞轮意识</span>
+        </div>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+        <div style="display:flex;align-items:center;gap:0.75rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg><h3 style="font-size:1.05rem;font-weight:500">数据能力</h3></div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+          <span class="pill">SQL 数据处理</span><span class="pill">指标分析</span><span class="pill">效果复盘</span><span class="pill">Badcase 分析</span>
+        </div>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+        <div style="display:flex;align-items:center;gap:0.75rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg><h3 style="font-size:1.05rem;font-weight:500">设计能力</h3></div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+          <span class="pill">Figma</span><span class="pill">Axure</span><span class="pill">交互设计</span><span class="pill">视觉规范</span>
+        </div>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem;background:var(--color-surface)">
+        <div style="display:flex;align-items:center;gap:0.75rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg><h3 style="font-size:1.05rem;font-weight:500">AI 协作 / 工具能力</h3></div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+          <span class="pill">ChatGPT</span><span class="pill">Claude</span><span class="pill">Gemini</span><span class="pill">XMind</span><span class="pill">Codex</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AWARDS ===== -->
+<section class="section-shell" id="awards">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 7 7 9 8"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5C17 4 17 7 15 8"/><path d="M4 22h16"/><path d="M10 22V8"/><path d="M14 22V8"/><path d="M12 2v4"/></svg>Selected Awards</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">部分奖项与认可</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">来自设计、体验与创新方向的阶段性认可，也构成了我作品集的重要补充。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="ui-card-quiet" style="padding:1.25rem">
+        <span class="stat-value" style="color:var(--color-accent);font-size:1.1rem">二等奖</span>
+        <p style="font-size:0.92rem;margin-top:0.5rem;font-weight:500">第九届"米兰设计周-中国高校设计学科师生优秀作品展"（全国总决赛）</p>
+        <p class="body-copy" style="font-size:var(--text-small);margin-top:0.5rem">证明我具备把概念表达、方案完成度与设计叙事整合到同一作品中的能力。</p>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem">
+        <span class="stat-value" style="color:var(--color-accent);font-size:1.1rem">优秀奖</span>
+        <p style="font-size:0.92rem;margin-top:0.5rem;font-weight:500">2025 home+国际服务设计大赛</p>
+        <p class="body-copy" style="font-size:var(--text-small);margin-top:0.5rem">说明我不仅关注产品形态，也能从服务流程、触点设计与整体体验角度思考问题。</p>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem">
+        <span class="stat-value" style="color:var(--color-accent);font-size:1.1rem">佳作奖</span>
+        <p style="font-size:0.92rem;margin-top:0.5rem;font-weight:500">DIA 第十届中国设计智造大奖（全国总决赛）</p>
+        <p class="body-copy" style="font-size:var(--text-small);margin-top:0.5rem">体现了我在设计创新、落地逻辑与产业关联性上的综合能力。</p>
+      </div>
+      <div class="ui-card-quiet" style="padding:1.25rem">
+        <span class="stat-value" style="color:var(--color-accent);font-size:1.1rem">三等奖</span>
+        <p style="font-size:0.92rem;margin-top:0.5rem;font-weight:500">UXDA 第十七届国际用户创新体验设计大赛（全国总决赛）</p>
+        <p class="body-copy" style="font-size:var(--text-small);margin-top:0.5rem">证明我在用户体验、交互逻辑与完整体验系统构建上具备稳定的设计判断力。</p>
+      </div>
+    </div>
+    <div class="ui-card-quiet" style="padding:1.25rem">
+      <p class="meta-label" style="margin-bottom:0.75rem">其他奖项</p>
+      <div style="display:grid;gap:0.5rem">
+        <p class="body-copy" style="font-size:var(--text-small)">第九届"米兰设计周-中国高校设计学科师生优秀作品展"（江苏赛区）/ 一等奖</p>
+        <p class="body-copy" style="font-size:var(--text-small)">第十三届未来设计师全国高校数字艺术设计大赛（江苏赛区）/ 一等奖</p>
+        <p class="body-copy" style="font-size:var(--text-small)">第十三届未来设计师全国高校数字艺术设计大赛（浙江赛区）/ 三等奖</p>
+        <p class="body-copy" style="font-size:var(--text-small)">第十届两岸新锐设计竞赛·华灿奖（全国总决赛）/ 三等奖</p>
+        <p class="body-copy" style="font-size:var(--text-small)">第十届两岸新锐设计竞赛·华灿奖（区赛）/ 二等奖</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESUME ===== -->
+<section class="section-shell" id="resume">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Resume</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">简历与快速了解入口</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">适合投递附件、面试前预读和一页式浏览。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <a class="ui-card" href="/files/yuhang-resume.pdf" download style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:0.75rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <p class="meta-label meta-label-accent">下载完整简历</p>
+            </div>
+            <p style="font-size:0.9rem;font-weight:500;margin-top:0.5rem">PDF · 完整版</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </div>
+        <p class="body-copy" style="font-size:var(--text-small)">完整 PDF 简历，适合作为正式投递附件或在面试前进行快速预读。</p>
+        <div style="margin-top:auto"><span class="ui-button ui-button-secondary" style="display:inline-flex">下载简历</span></div>
+      </a>
+      <a class="ui-card" href="/resume" style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:0.75rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <p class="meta-label meta-label-accent">在线查看 Resume</p>
+            </div>
+            <p style="font-size:0.9rem;font-weight:500;margin-top:0.5rem">Web · 一页式</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </div>
+        <p class="body-copy" style="font-size:var(--text-small)">一页式在线简历，适合在面试前快速了解我的教育、经历与能力结构。</p>
+        <div style="margin-top:auto"><span class="ui-button ui-button-secondary" style="display:inline-flex">在线查看</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section class="section-shell" id="portfolio">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>Portfolio</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">作品集与项目资料</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">如果你希望进一步了解我的设计训练、项目过程与最终产出，可以从下面的资料进入。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <!-- Portfolio 1 -->
+      <a class="ui-card" href="https://pan.baidu.com/s/11N6Y3mlemXhG-a99hrQCIw?pwd=1234" target="_blank" rel="noreferrer" style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:0.75rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>
+              <p class="meta-label meta-label-accent">完整作品集</p>
+            </div>
+            <p style="font-size:0.9rem;font-weight:500;margin-top:0.5rem">适合先整体了解我</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </div>
+        <p class="body-copy" style="font-size:var(--text-small)">系统查看我的工业设计训练、产品思考方式与跨项目方法脉络。</p>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--color-border);padding-top:0.75rem">
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4v16"/><path d="M8 4h12v12H8z"/></svg>
+            <span class="meta-label">百度网盘</span>
+            <span class="meta-label">· PWD</span>
+            <span class="meta-label meta-label-accent">1234</span>
+          </div>
+          <span class="ui-button ui-button-secondary ui-button-compact">查看资料</span>
+        </div>
+      </a>
+      <!-- Portfolio 2 -->
+      <a class="ui-card" href="https://pan.baidu.com/s/1q83Wg9aevSsH2VMc-O9vXQ?pwd=1234" target="_blank" rel="noreferrer" style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:0.75rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>
+              <p class="meta-label meta-label-accent">UniGrip</p>
+            </div>
+            <p style="font-size:0.9rem;font-weight:500;margin-top:0.5rem">适合看设计与问题定义</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </div>
+        <p class="body-copy" style="font-size:var(--text-small)">聚焦产品定义、体验设计与方案表达的代表项目资料。</p>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--color-border);padding-top:0.75rem">
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4v16"/><path d="M8 4h12v12H8z"/></svg>
+            <span class="meta-label">百度网盘</span>
+            <span class="meta-label">· PWD</span>
+            <span class="meta-label meta-label-accent">1234</span>
+          </div>
+          <span class="ui-button ui-button-secondary ui-button-compact">查看资料</span>
+        </div>
+      </a>
+      <!-- Portfolio 3 -->
+      <a class="ui-card" href="https://pan.baidu.com/s/1HaMCB138HvuJpP7N8hw3Mg?pwd=1234" target="_blank" rel="noreferrer" style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:0.75rem">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>
+              <p class="meta-label meta-label-accent">MediCruise</p>
+            </div>
+            <p style="font-size:0.9rem;font-weight:500;margin-top:0.5rem">适合看跨领域项目</p>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:0.2rem"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </div>
+        <p class="body-copy" style="font-size:var(--text-small)">补充医疗与跨领域设计项目，帮助了解我的场景迁移能力。</p>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--color-border);padding-top:0.75rem">
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M4 4v16"/><path d="M8 4h12v12H8z"/></svg>
+            <span class="meta-label">百度网盘</span>
+            <span class="meta-label">· PWD</span>
+            <span class="meta-label meta-label-accent">1234</span>
+          </div>
+          <span class="ui-button ui-button-secondary ui-button-compact">查看资料</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUILT WITH CODEX ===== -->
+<section class="section-shell" id="built-with-codex">
+  <div style="display:flex;flex-direction:column;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>Built with Codex</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">与 Codex 协作完成</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">这个站点由我先定义信息结构、视觉约束与内容框架，再与 Codex 协作完成前端实现和迭代优化。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <div class="ui-card" style="padding:1.25rem">
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <span class="stat-value" style="color:var(--color-accent);font-size:1.2rem">01</span>
+          <h3 style="font-size:1.05rem;font-weight:500">明确定位与结构</h3>
+        </div>
+        <p class="body-copy" style="margin-top:1rem">先梳理受众、内容优先级与页面层级，让表达更贴近招聘场景。</p>
+      </div>
+      <div class="ui-card" style="padding:1.25rem">
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <span class="stat-value" style="color:var(--color-accent);font-size:1.2rem">02</span>
+          <h3 style="font-size:1.05rem;font-weight:500">拆分组件与实现</h3>
+        </div>
+        <p class="body-copy" style="margin-top:1rem">把内容、设计 token、组件职责与技术栈一起纳入约束，确保生成结果可维护、可继续迭代。</p>
+      </div>
+      <div class="ui-card" style="padding:1.25rem">
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <span class="stat-value" style="color:var(--color-accent);font-size:1.2rem">03</span>
+          <h3 style="font-size:1.05rem;font-weight:500">打磨文案与层级</h3>
+        </div>
+        <p class="body-copy" style="margin-top:1rem">围绕文案密度、视觉成熟度与滚动节奏持续调整，减少模板感与说明书语气。</p>
+      </div>
+      <div class="ui-card" style="padding:1.25rem">
+        <div style="display:flex;align-items:center;gap:0.75rem">
+          <span class="stat-value" style="color:var(--color-accent);font-size:1.2rem">04</span>
+          <h3 style="font-size:1.05rem;font-weight:500">完成运行验证</h3>
+        </div>
+        <p class="body-copy" style="margin-top:1rem">补齐本地运行、构建、联系表单与部署说明，让结果能够直接打开、查看与分享。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section-shell" id="contact">
+  <div style="display:grid;gap:2.5rem" data-reveal>
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact</span>
+      <div style="max-width:72ch">
+        <h2 class="section-title">欢迎联系我</h2>
+        <p class="body-copy" style="max-width:60ch;margin-top:0.75rem">如果你在寻找兼顾体验、结构化思考与 AI 产品落地能力的产品经理，欢迎直接与我联系。</p>
+      </div>
+    </div>
+    <div style="display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="ui-card-quiet" style="padding:1.25rem 1.5rem">
+        <div style="display:grid;gap:1rem">
+          <a href="mailto:18754153867@163.com" class="ui-panel-muted" style="display:flex;align-items:center;gap:0.75rem;padding:1rem 1.25rem">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <div><p class="meta-label">邮箱</p><p class="body-copy">18754153867@163.com</p></div>
+          </a>
+          <a href="tel:18754153867" class="ui-panel-muted" style="display:flex;align-items:center;gap:0.75rem;padding:1rem 1.25rem">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><p class="meta-label">微信 / 手机</p><p class="body-copy">18754153867</p></div>
+          </a>
+        </div>
+        <div style="margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.75rem">
+          <a class="ui-button ui-button-secondary" href="/files/yuhang-resume.pdf" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>下载简历</a>
+        </div>
+        <p class="body-copy-soft" style="margin-top:1rem">也欢迎先查看简历与作品集，再决定是否安排进一步沟通。</p>
+      </div>
+      <div>
+        <form id="contactForm" onsubmit="return handleContactForm(event)">
+          <div style="display:grid;gap:1rem;grid-template-columns:1fr 1fr">
+            <div class="form-group" style="margin-top:0">
+              <label class="form-label" for="name">Name</label>
+              <input class="form-control" id="name" name="name" placeholder="你的姓名" required>
+            </div>
+            <div class="form-group" style="margin-top:0">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-control" id="email" name="email" type="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="company">Company / Team</label>
+            <input class="form-control" id="company" name="company" placeholder="公司或团队名称">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-control form-control--textarea" id="message" name="message" placeholder="想说的话..." required></textarea>
+          </div>
+          <button class="ui-button ui-button-primary" style="margin-top:1.5rem" type="submit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>
+            发送联系信息
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div style="display:flex;flex-direction:column;gap:0.5rem">
+    <p>© 2026 任思雨 · Built with Next.js, Tailwind, Framer Motion and Codex.</p>
+  </div>
+</footer>
+
+</main>
+</div><!-- end page-grid -->
+
+<!-- ===== BOTTOM NAV MOBILE ===== -->
+<div class="bottom-nav-wrapper">
+  <div class="bottom-nav">
+    <button class="ui-button ui-button-ghost ui-button-compact" onclick="document.getElementById('selected-projects').scrollIntoView({behavior:'smooth'})">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></svg>
+      项目
+    </button>
+    <a class="ui-button ui-button-ghost ui-button-compact" href="/files/yuhang-resume.pdf" download>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      简历
+    </a>
+    <button class="ui-button ui-button-ghost ui-button-compact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      联系
+    </button>
+  </div>
+</div>
+
+</div><!-- end page-wrapper -->
+
+<script>
+// ===== SCROLL REVEAL =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('[data-reveal]').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ===== THEME TOGGLE =====
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+    const active = btn.getAttribute('data-theme-btn') === theme;
+    btn.setAttribute('data-active', active ? 'true' : 'false');
+    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+  try { localStorage.setItem('theme', theme); } catch(e) {}
+}
+
+document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+  btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-btn')));
+});
+
+// Load saved theme
+try {
+  const saved = localStorage.getItem('theme');
+  if (saved && (saved === 'dark' || saved === 'light')) setTheme(saved);
+} catch(e) {}
+
+// ===== SIDEBAR NAVIGATION =====
+const sections = [
+  { id: 'about', label: 'About' },
+  { id: 'education', label: 'Education' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'selected-projects', label: 'Selected Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'awards', label: 'Awards' },
+  { id: 'resume', label: 'Resume' },
+  { id: 'portfolio', label: 'Portfolio' },
+  { id: 'built-with-codex', label: 'Codex' },
+  { id: 'contact', label: 'Contact' }
+];
+
+const topNav = document.getElementById('topNav');
+const mobileNavLinks = document.getElementById('mobileNavLinks');
+
+sections.forEach((s, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'nav-item';
+  btn.setAttribute('data-nav', s.id);
+  btn.type = 'button';
+  btn.innerHTML = `<span class="nav-dash"></span><span>${s.label}</span>`;
+  btn.addEventListener('click', () => {
+    document.getElementById(s.id).scrollIntoView({ behavior: 'smooth' });
+    closeDrawer();
+  });
+  topNav.appendChild(btn);
+
+  // Mobile nav link (kept as is)
+  const mBtn = document.createElement('button');
+  mBtn.className = 'nav-item';
+  mBtn.setAttribute('data-nav', s.id);
+  mBtn.type = 'button';
+  mBtn.innerHTML = `<span class="nav-dash"></span><span>${s.label}</span>`;
+  mBtn.addEventListener('click', () => {
+    document.getElementById(s.id).scrollIntoView({ behavior: 'smooth' });
+    closeDrawer();
+  });
+  mobileNavLinks.appendChild(mBtn);
+});
+
+// ===== SCROLL SPY =====
+function updateActiveNav() {
+  const scrollPos = window.scrollY + 120;
+  let activeId = sections[0].id;
+
+  sections.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el && el.offsetTop <= scrollPos) {
+      activeId = s.id;
+    }
+  });
+
+  document.querySelectorAll('[data-nav]').forEach(btn => {
+    const isActive = btn.getAttribute('data-nav') === activeId;
+    btn.setAttribute('data-active', isActive ? 'true' : 'false');
+    btn.querySelector('.nav-dash').style.width = isActive ? '2.5rem' : '';
+    btn.querySelector('.nav-dash').style.background = isActive ? '' : '';
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+window.addEventListener('load', updateActiveNav);
+
+// ===== MOBILE DRAWER =====
+const drawer = document.getElementById('mobileDrawer');
+const openBtn = document.getElementById('mobileMenuBtn');
+const closeBtn = document.getElementById('closeDrawerBtn');
+
+function openDrawer() {
+  drawer.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  drawer.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+openBtn.addEventListener('click', openDrawer);
+closeBtn.addEventListener('click', closeDrawer);
+
+// ===== GALLERY CAROUSELS =====
+function initGallery(name, trackId, counterId, dotsId, captions) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const slides = track.children;
+  const total = slides.length;
+  if (total === 0) return;
+
+  let current = 0;
+  const counter = document.getElementById(counterId);
+
+  function updateGallery() {
+    const slideWidth = slides[0].offsetWidth + parseFloat(getComputedStyle(track).gap || '0.75rem');
+    track.style.transform = `translateX(-${current * slideWidth}px)`;
+    if (counter) {
+      counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+    }
+    // Update dots
+    if (dotsId) {
+      const dots = document.querySelectorAll(`#${dotsId} .indicator-button`);
+      dots.forEach((d, i) => {
+        d.setAttribute('data-active', i === current ? 'true' : 'false');
+      });
+    }
+    // Update caption for about gallery
+    if (name === 'about' && captions) {
+      const captionEl = document.getElementById('aboutGalleryCaption');
+      if (captionEl && captions[current]) captionEl.textContent = captions[current];
+    }
+  }
+
+  // Prev/Next buttons
+  document.querySelectorAll(`[data-gallery-prev="${name}"]`).forEach(btn => {
+    btn.addEventListener('click', () => {
+      current = (current - 1 + total) % total;
+      updateGallery();
+    });
+  });
+  document.querySelectorAll(`[data-gallery-next="${name}"]`).forEach(btn => {
+    btn.addEventListener('click', () => {
+      current = (current + 1) % total;
+      updateGallery();
+    });
+  });
+
+  // Create dots for about gallery
+  if (dotsId) {
+    const dotsContainer = document.getElementById(dotsId);
+    if (dotsContainer) {
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'indicator-button';
+        dot.setAttribute('data-active', i === 0 ? 'true' : 'false');
+        dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+        dot.addEventListener('click', () => {
+          current = i;
+          updateGallery();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+  }
+
+  // Touch/swipe support
+  let startX = 0, isDragging = false;
+  track.addEventListener('mousedown', (e) => { startX = e.clientX; isDragging = true; });
+  track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; isDragging = true; }, { passive: true });
+  window.addEventListener('mousemove', (e) => { if (isDragging) e.preventDefault(); });
+  window.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = e.clientX - startX;
+    if (Math.abs(diff) > 50) {
+      current = diff > 0 ? (current - 1 + total) % total : (current + 1) % total;
+      updateGallery();
+    }
+  });
+  track.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) {
+      current = diff > 0 ? (current - 1 + total) % total : (current + 1) % total;
+      updateGallery();
+    }
+  });
+
+  // Window resize handler
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateGallery, 150);
+  });
+
+  updateGallery();
+}
+
+// Initialize all galleries
+initGallery('about', 'aboutGalleryTrack', null, 'aboutGalleryDots', ['在设计学院的日常状态', '校园活动中的交流与参与', '线下活动中的个人在场']);
+initGallery('baidu', 'baiduGalleryTrack', 'baiduGalleryCounter');
+initGallery('yadea', 'yadeaGalleryTrack', 'yadeaGalleryCounter');
+initGallery('livat', 'livatGalleryTrack', 'livatGalleryCounter');
+
+// ===== CONTACT FORM =====
+function handleContactForm(event) {
+  event.preventDefault();
+  const form = event.target;
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    company: form.company.value,
+    message: form.message.value
+  };
+  // Simple client-side handling
+  const btn = form.querySelector('button[type="submit"]');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = '✓ 已发送';
+  btn.style.opacity = '0.7';
+  setTimeout(() => {
+    btn.innerHTML = originalText;
+    btn.style.opacity = '1';
+    form.reset();
+  }, 3000);
+  console.log('Contact form submitted:', data);
+  return false;
+}
+</script>
+
+<!-- Cyberpunk dynamic background canvas animation -->
+<script>
+(function(){
+  const c = document.getElementById('cyberBg');
+  if(!c)return;
+  const x = c.getContext('2d');
+  let W, H, theme = 'dark';
+
+  function resize(){
+    W=c.width=window.innerWidth;
+    H=c.height=window.innerHeight;
+  }
+  window.addEventListener('resize',resize);
+  resize();
+
+  // Observe theme changes
+  const obs = new MutationObserver(()=>{
+    theme = document.documentElement.getAttribute('data-theme')||'dark';
+  });
+  obs.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  // ---- Circuit paths ----
+  const circuits = [];
+  function initCircuits(){
+    circuits.length=0;
+    const count = Math.min(24, Math.round(W*H/35000));
+    for(let i=0;i<count;i++){
+      const startX = Math.random()*W;
+      const startY = Math.random()*H;
+      const segments = 3 + Math.floor(Math.random()*4);
+      const pts = [{x:startX,y:startY}];
+      for(let s=0;s<segments;s++){
+        const dir = Math.random()>0.5 ? 'h' : 'v';
+        const len = 30 + Math.random()*120;
+        const last = pts[pts.length-1];
+        pts.push(dir==='h' ? {x:last.x+(Math.random()>0.5?len:-len),y:last.y} : {x:last.x,y:last.y+(Math.random()>0.5?len:-len)});
+      }
+      circuits.push({
+        pts, phase:Math.random()*Math.PI*2, speed:0.0003+Math.random()*0.0006,
+        hue:Math.random(), pulse:Math.random()*Math.PI*2, pulseSpeed:0.005+Math.random()*0.01
+      });
+    }
+  }
+  initCircuits();
+  let circuitsTimer;
+  window.addEventListener('resize',()=>{clearTimeout(circuitsTimer);circuitsTimer=setTimeout(initCircuits,500)});
+
+  // ---- Data stream particles ----
+  const streams = [];
+  function initStreams(){
+    streams.length=0;
+    const count = Math.min(50, Math.round(W*H/20000));
+    for(let i=0;i<count;i++){
+      streams.push({
+        x:Math.random()*W, y:Math.random()*H,
+        speed:0.3+Math.random()*1.2, len:3+Math.floor(Math.random()*12),
+        size:1+Math.random()*1.5, alpha:0.08+Math.random()*0.15,
+        hue:Math.random()
+      });
+    }
+  }
+  initStreams();
+  let streamsTimer;
+  window.addEventListener('resize',()=>{clearTimeout(streamsTimer);streamsTimer=setTimeout(initStreams,500)});
+
+  // ---- Ambient glow spots ----
+  const glows = [
+    {x:0.2,y:0.3,r:0.35,h:0.76,dx:0.0003,dy:0.0002},  // purple
+    {x:0.8,y:0.6,r:0.3,h:0.92,dx:-0.0002,dy:0.0004},   // magenta
+    {x:0.5,y:0.8,r:0.25,h:0.58,dx:0.0004,dy:-0.0003},  // cyan
+    {x:0.15,y:0.7,r:0.2,h:0.82,dx:-0.0003,dy:-0.0002}, // pink-purple
+    {x:0.85,y:0.2,r:0.22,h:0.68,dx:0.0002,dy:-0.0004}  // blue-purple
+  ];
+
+  // ---- Glitch lines ----
+  let nextGlitch = 0;
+
+  // ---- Frame timing ----
+  let lastTime = 0;
+
+  function draw(time){
+    const dt = time - lastTime;
+    lastTime = time;
+    const t = time * 0.001;
+
+    x.clearRect(0,0,W,H);
+    const isDark = theme === 'dark';
+
+    // 1. Ambient glows
+    for(const g of glows){
+      g.x += g.dx * dt;
+      g.y += g.dy * dt;
+      if(g.x<0||g.x>1)g.dx*=-1;
+      if(g.y<0||g.y>1)g.dy*=-1;
+      const cx = g.x * W;
+      const cy = g.y * H;
+      const r = g.r * Math.max(W,H);
+      const grad = x.createRadialGradient(cx,cy,0,cx,cy,r);
+      if(isDark){
+        const a = 0.07 + 0.035 * Math.sin(t * 0.3 + g.h * 10);
+        grad.addColorStop(0,`hsla(${g.h*360-30},85%,55%,${a})`);
+        grad.addColorStop(0.5,`hsla(${g.h*360-30},75%,45%,${a*0.4})`);
+        grad.addColorStop(1,'transparent');
+      } else {
+        const a = 0.03 + 0.02 * Math.sin(t * 0.3 + g.h * 10);
+        grad.addColorStop(0,`hsla(${g.h*360-30},60%,60%,${a})`);
+        grad.addColorStop(0.5,`hsla(${g.h*360-30},50%,55%,${a*0.3})`);
+        grad.addColorStop(1,'transparent');
+      }
+      x.fillStyle = grad;
+      x.fillRect(0,0,W,H);
+    }
+
+    // 2. Circuit lines (purple→cyan→magenta flow)
+    x.lineWidth = isDark ? 0.8 : 0.5;
+    for(const cir of circuits){
+      cir.phase += cir.speed * dt;
+      cir.pulse += cir.pulseSpeed * dt;
+      const alpha = isDark ? (0.05 + 0.07 * (0.5 + 0.5 * Math.sin(cir.pulse))) : (0.02 + 0.03 * (0.5 + 0.5 * Math.sin(cir.pulse)));
+      if(alpha < 0.005) continue;
+
+      const hue = (cir.hue * 360 + t * 8 + 260) % 360; // shifted toward purple range
+      x.strokeStyle = `hsla(${hue},85%,${isDark?55:50}%,${alpha})`;
+      x.beginPath();
+      const pts = cir.pts;
+      x.moveTo(pts[0].x,pts[0].y);
+      for(let i=1;i<pts.length;i++){
+        const p = pts[i-1], p2 = pts[i];
+        if(p.x === p2.x){
+          x.lineTo(p2.x,p2.y);
+        } else {
+          x.lineTo(p2.x,p2.y);
+        }
+      }
+      x.stroke();
+
+      // Node dots at corners
+      for(let i=0;i<pts.length;i++){
+        const na = 0.07 + 0.09 * (0.5 + 0.5 * Math.sin(cir.pulse + i));
+        x.beginPath();
+        x.arc(pts[i].x,pts[i].y,1.2,0,Math.PI*2);
+        x.fillStyle = `hsla(${hue},85%,${isDark?60:55}%,${na})`;
+        x.fill();
+      }
+    }
+
+    // 3. Data streams (purple-pink-cyan)
+    for(const s of streams){
+      s.y += s.speed * (dt * 0.06);
+      if(s.y > H + s.len * 6){
+        s.y = -s.len * 6;
+        s.x = Math.random() * W;
+      }
+      const hue = (s.hue * 360 + 260) % 360;
+      const a = s.alpha * (isDark ? 1 : 0.5);
+      const grad = x.createLinearGradient(s.x,s.y-s.len*3,s.x,s.y);
+      grad.addColorStop(0,'transparent');
+      grad.addColorStop(0.4,`hsla(${hue},85%,${isDark?60:55}%,${a})`);
+      grad.addColorStop(0.7,`hsla(${(hue+60)%360},85%,${isDark?55:50}%,${a*0.7})`);
+      grad.addColorStop(1,'transparent');
+      x.strokeStyle = grad;
+      x.lineWidth = s.size * 0.5;
+      x.beginPath();
+      x.moveTo(s.x,s.y);
+      x.lineTo(s.x + Math.sin(t*0.5+s.x*0.01)*2, s.y - s.len*6);
+      x.stroke();
+    }
+
+    // 4. Glitch fault lines (purple-magenta flashes)
+    if(time > nextGlitch){
+      const count = 1 + Math.floor(Math.random()*2);
+      for(let g=0;g<count;g++){
+        const gy = Math.random() * H;
+        const gw = 20 + Math.random() * 150;
+        const gh = 1 + Math.random() * 2;
+        const glitchAlpha = isDark ? (0.04 + Math.random()*0.05) : (0.02 + Math.random()*0.02);
+        const hue = Math.random() > 0.5 ? 280 : 320; // purple / magenta
+        x.fillStyle = `hsla(${hue},85%,${isDark?55:50}%,${glitchAlpha})`;
+        x.fillRect(Math.random()*W*0.3,gw,Math.random()*W*0.4,gh);
+        // micro offset glitch
+        x.fillStyle = `hsla(${hue+30},85%,${isDark?50:45}%,${glitchAlpha*0.5})`;
+        x.fillRect(Math.random()*W*0.3,gy+2,Math.random()*W*0.3,1);
+      }
+      nextGlitch = time + 800 + Math.random() * 3000;
+    }
+
+    // 5. Pixel grain (subtle purple-tinted noise)
+    const grainSize = isDark ? 2 : 3;
+    const grainAlpha = isDark ? 0.015 : 0.006;
+    for(let i=0;i<60;i++){
+      const gx = Math.random()*W;
+      const gy = Math.random()*H;
+      const gw2 = grainSize + Math.random()*2;
+      const gh2 = grainSize * 0.5;
+      const bright = Math.random();
+      x.fillStyle = isDark
+        ? `rgba(${180+bright*75},${150+bright*60},${220+bright*35},${grainAlpha})`
+        : `rgba(${160+bright*50},${150+bright*50},${170+bright*40},${grainAlpha*0.6})`;
+      x.fillRect(gx,gy,gw2,gh2);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>

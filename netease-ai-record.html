@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>网易小蜜蜂 · AI 记录项目 | 任思雨</title>
+<meta name="description" content="网易小蜜蜂 AI 记录项目完整复盘：从需求背景、用户调研、产品定义到端云 AI 模型协同的全流程产品设计案例。"/>
+<style>
+:root{--color-bg:#0d0818;--color-text:#e8e4f0;--color-text-soft:#8a80a8;--color-text-secondary:#b0a8c8;--color-border:rgba(0,240,255,.13);--color-cyan:#00f0ff;--color-magenta:#ff00aa;--color-blue:#4d8dff;--radius-sm:6px;--radius-lg:18px;--radius-xl:24px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--color-bg);color:var(--color-text);line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,240,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(176,0,255,.035) 1px,transparent 1px);background-size:48px 48px}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 8% 10%,rgba(0,240,255,.14),transparent 28%),radial-gradient(circle at 90% 20%,rgba(77,141,255,.13),transparent 30%),radial-gradient(circle at 50% 92%,rgba(255,0,170,.09),transparent 34%)}
+a{color:inherit;text-decoration:none}
+
+/* Layout */
+.page{position:relative;z-index:1;min-height:100vh;padding:1rem 0 4rem}
+.topbar{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto 1.5rem;padding:0 clamp(1rem,4vw,3rem)}
+.content{max-width:900px;margin:0 auto;padding:0 clamp(1rem,4vw,3rem)}
+
+/* UI */
+.ui-button{display:inline-flex;align-items:center;justify-content:center;gap:.42rem;border:1px solid rgba(0,240,255,.22);border-radius:var(--radius-sm);padding:.46rem .88rem;background:rgba(18,10,32,.58);color:var(--color-text);font-size:.78rem;transition:all .2s ease;cursor:pointer}
+.ui-button:hover{border-color:rgba(0,240,255,.42);color:var(--color-cyan);background:rgba(0,240,255,.08)}
+.eyebrow{display:inline-flex;align-items:center;gap:.42rem;border:1px solid var(--color-border);border-radius:999px;padding:.32rem .72rem;background:rgba(28,18,48,.46);color:var(--color-text-soft);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase}
+.eyebrow::before{content:'';width:.36rem;height:.36rem;border-radius:999px;background:var(--color-cyan);box-shadow:0 0 12px var(--color-cyan)}
+
+/* Hero */
+.hero{margin-bottom:2.5rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.1rem}
+.meta-chip{border:1px solid rgba(0,240,255,.16);border-radius:999px;padding:.24rem .64rem;background:rgba(0,240,255,.06);color:var(--color-text-soft);font-size:.72rem}
+h1{margin-top:.75rem;font-size:clamp(1.6rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.03em}
+.lead{max-width:72ch;margin-top:.85rem;color:var(--color-text-secondary);font-size:clamp(.9rem,1.05vw,1rem);line-height:1.8}
+
+/* Section */
+.section{margin-top:2.4rem}
+.section-label{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.section-num{display:grid;place-items:center;width:1.8rem;height:1.8rem;border-radius:999px;background:linear-gradient(135deg,rgba(0,240,255,.22),rgba(77,141,255,.18));color:var(--color-cyan);font-size:.7rem;font-weight:800;flex-shrink:0}
+.section-title-text{font-size:clamp(.95rem,1.4vw,1.15rem);font-weight:600;letter-spacing:-.01em}
+.section-sub{margin-top:.2rem;color:var(--color-text-soft);font-size:.73rem;letter-spacing:.08em;text-transform:uppercase}
+
+/* Card */
+.card{position:relative;overflow:hidden;border:1px solid rgba(0,240,255,.10);border-radius:var(--radius-xl);background:linear-gradient(135deg,rgba(18,10,32,.72),rgba(13,8,24,.48));box-shadow:0 16px 48px rgba(0,0,0,.18);padding:1.2rem 1.35rem;margin-top:.85rem}
+.card::before{content:'';position:absolute;left:1.2rem;right:1.2rem;top:0;height:1px;background:linear-gradient(90deg,var(--color-cyan),var(--color-blue),transparent);opacity:.65}
+.card p{color:var(--color-text-secondary);font-size:.9rem;line-height:1.78}
+.card p+p{margin-top:.6rem}
+.card-title{font-size:clamp(.92rem,1.3vw,1.05rem);font-weight:600;margin-bottom:.6rem}
+
+/* Two-col cards */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:.85rem}
+
+/* Insight rows */
+.insight-row{display:grid;grid-template-columns:2rem 1fr;gap:.6rem;align-items:start;margin-top:.65rem}
+.insight-dot{width:.42rem;height:.42rem;margin-top:.56rem;border-radius:999px;background:var(--color-cyan);box-shadow:0 0 10px rgba(0,240,255,.45);justify-self:center}
+.insight-row p{color:var(--color-text-secondary);font-size:.88rem;line-height:1.7}
+
+/* Gap highlight */
+.gap-box{border:1px solid rgba(255,0,170,.2);border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(255,0,170,.08),rgba(0,240,255,.05));padding:1rem 1.1rem;margin-top:.85rem}
+.gap-box .gap-label{color:var(--color-magenta);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.gap-box p{margin-top:.35rem;color:var(--color-text-secondary);font-size:.88rem;line-height:1.72}
+
+/* User path steps */
+.path-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.65rem;margin-top:.85rem}
+.path-step{border:1px solid rgba(0,240,255,.10);border-radius:var(--radius-lg);background:rgba(13,8,24,.38);padding:.8rem .9rem}
+.path-step-num{color:var(--color-cyan);font-size:.7rem;font-weight:800;letter-spacing:.1em}
+.path-step b{display:block;font-size:.86rem;margin-top:.2rem}
+.path-step span{display:block;margin-top:.32rem;color:var(--color-text-soft);font-size:.78rem;line-height:1.5}
+
+/* Model pipeline */
+.pipeline{display:flex;align-items:stretch;gap:0;margin-top:.85rem;overflow-x:auto;padding-bottom:.5rem}
+.pipe-node{flex:1;min-width:130px;border:1px solid rgba(0,240,255,.12);border-radius:var(--radius-lg);background:rgba(18,10,32,.6);padding:.75rem .85rem;position:relative}
+.pipe-node+.pipe-node{margin-left:.5rem}
+.pipe-node::after{content:'→';position:absolute;right:-1rem;top:50%;transform:translateY(-50%);color:rgba(0,240,255,.4);font-size:.9rem;z-index:2}
+.pipe-node:last-child::after{display:none}
+.pipe-node-label{color:var(--color-cyan);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.pipe-node p{margin-top:.32rem;color:var(--color-text-soft);font-size:.78rem;line-height:1.52}
+
+/* Model detail table-like */
+.model-grid{display:grid;gap:.65rem;margin-top:.85rem}
+.model-row{display:grid;grid-template-columns:9rem 1fr;gap:.8rem;border:1px solid rgba(0,240,255,.09);border-radius:var(--radius-lg);background:rgba(13,8,24,.36);padding:.8rem 1rem;align-items:start}
+.model-row-label{color:var(--color-cyan);font-size:.78rem;font-weight:700;padding-top:.1rem}
+.model-row-body{color:var(--color-text-secondary);font-size:.86rem;line-height:1.7}
+.model-row-body b{color:var(--color-text);font-weight:600}
+
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.tag{border:1px solid rgba(0,240,255,.16);border-radius:999px;padding:.22rem .52rem;background:rgba(0,240,255,.06);color:var(--color-cyan);font-size:.7rem}
+.tag-pink{border-color:rgba(255,0,170,.2);background:rgba(255,0,170,.06);color:var(--color-magenta)}
+
+/* Divider */
+.divider{border:none;border-top:1px solid rgba(0,240,255,.08);margin:2rem 0}
+
+@media(max-width:700px){
+  .two-col{grid-template-columns:1fr}
+  .path-steps{grid-template-columns:1fr 1fr}
+  .pipeline{flex-direction:column}
+  .pipe-node::after{display:none}
+  .model-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .path-steps{grid-template-columns:1fr}
+  .topbar,.content{padding-left:.9rem;padding-right:.9rem}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <a class="ui-button" href="index.html">← 返回主页</a>
+    <span class="eyebrow">CASE STUDY · 完整案例</span>
+  </header>
+
+  <main class="content">
+
+    <!-- Hero -->
+    <section class="hero" aria-label="案例标题">
+      <span class="eyebrow">网易传媒 · AI 产品经理 · 2025.10–2026.01</span>
+      <h1>网易小蜜蜂<br/>AI 记录项目</h1>
+      <p class="lead">通过端云协同的多模态 AI 模型，帮助用户从手机相册中自动聚合生成私密记录卡片，以产品力替代资金打法，提升平台用户黏性。</p>
+      <div class="hero-meta">
+        <span class="meta-chip">AI 产品设计</span>
+        <span class="meta-chip">端云协同</span>
+        <span class="meta-chip">多模态模型</span>
+        <span class="meta-chip">模型训练参与</span>
+        <span class="meta-chip">0→1 落地</span>
+      </div>
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- 01 背景 -->
+    <section class="section" id="background">
+      <div class="section-label">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title-text">需求背景</div>
+          <div class="section-sub">WHY THIS PROJECT</div>
+        </div>
+      </div>
+      <div class="card">
+        <p>网易小蜜蜂是一个类小红书的内容创作与消费平台，核心内容形式为笔记。当前平台主要依赖<b>资金打法</b>——向用户发放激励、刺激创作者产出优质笔记——来拉动 DAU 与用户黏性。</p>
+        <p>然而，这种依赖资金补贴的增长模式<b>不可长期持续</b>。基于对平台产品力不足的判断，团队希望探索无需持续投入资金、能真正通过功能本身留住用户的方向。</p>
+        <p>目标明确：<b>找到一个有产品力的功能，让用户因为产品本身而留下来。</b></p>
+      </div>
+    </section>
+
+    <!-- 02 调研 -->
+    <section class="section" id="research">
+      <div class="section-label">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title-text">用户调研与竞品分析</div>
+          <div class="section-sub">RESEARCH</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">用户调研洞察</div>
+          <div class="insight-row"><div class="insight-dot"></div><p>用户普遍有强烈的<b>自我表达与记录需求</b>，无论是公开分享还是私下留存。</p></div>
+          <div class="insight-row"><div class="insight-dot"></div><p><b>公开发布</b>（小红书、朋友圈）的痛点：需要精心营造人设、修图压力大、面临社交评判焦虑。</p></div>
+          <div class="insight-row"><div class="insight-dot"></div><p><b>私密记录</b>（日记 App、私密朋友圈）的痛点：用户极难坚持，往往下载后用了几天就放弃。</p></div>
+        </div>
+        <div class="card">
+          <div class="card-title">竞品分析发现</div>
+          <div class="insight-row"><div class="insight-dot"></div><p>百度网盘、腾讯相册管家、一刻相册等均有相册聚合能力，但主要面向<b>整理存储</b>，不具备内容创作的引导路径。</p></div>
+          <div class="insight-row"><div class="insight-dot"></div><p>所有竞品在隐私声明上均使用<b>模糊化表达</b>（如"照片不会被储存"），不区分本地/云端细节，以此降低用户顾虑。</p></div>
+          <div class="insight-row"><div class="insight-dot"></div><p>市场上缺少一种<b>低社交压力、容易坚持、有结构化情感积累</b>的记录方式。</p></div>
+        </div>
+      </div>
+
+      <div class="gap-box">
+        <div class="gap-label">市场空白</div>
+        <p>用户需要一种方式：既不像公开发布那样有社交压力，又不像私密日记那样难以坚持——可以轻松记住自己的日常，并形成有意义的情感资产沉淀，从而自然地留在平台。</p>
+      </div>
+    </section>
+
+    <!-- 03 产品定义 -->
+    <section class="section" id="definition">
+      <div class="section-label">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title-text">产品方向定义</div>
+          <div class="section-sub">PRODUCT DIRECTION</div>
+        </div>
+      </div>
+      <div class="card">
+        <p>基于调研空白，确立核心方向：<b>用 AI 帮用户从相册中自动整理、生成私密记录卡片</b>。用户无需手动挑选和编辑，AI 完成结构化聚合，降低记录门槛，让坚持变得容易。</p>
+        <p>记录内容<b>仅自己可见</b>，消除社交压力；用户在平台沉淀的情感资产越多，离开成本越高，黏性自然提升——以此替代资金补贴，实现有产品力的增长。</p>
+      </div>
+      <div class="tags">
+        <span class="tag">私密记录</span>
+        <span class="tag">AI 聚合</span>
+        <span class="tag">情感资产</span>
+        <span class="tag tag-pink">不依赖资金打法</span>
+        <span class="tag tag-pink">提升用户黏性</span>
+      </div>
+    </section>
+
+    <!-- 04 用户路径 -->
+    <section class="section" id="userflow">
+      <div class="section-label">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title-text">核心用户路径</div>
+          <div class="section-sub">USER FLOW</div>
+        </div>
+      </div>
+
+      <div class="path-steps">
+        <div class="path-step">
+          <div class="path-step-num">STEP 01</div>
+          <b>入口触达</b>
+          <span>个人主页「笔记」Tab 旁的「记录」入口，点击进入</span>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">STEP 02</div>
+          <b>首次引导</b>
+          <span>新用户看到「开始记录」按钮；回访用户直接看到历史记录信息流 + 顶部记录按钮</span>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">STEP 03</div>
+          <b>双重授权</b>
+          <span>系统相册授权 → AI 记录数据授权（弹窗说明数据不储存，详细条款超链接说明本地/云端分工）</span>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">STEP 04</div>
+          <b>AI 聚合生成</b>
+          <span>加载动画：散乱照片被整理为结构化卡片，每组 5 张，逐批呈现</span>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">STEP 05</div>
+          <b>一键记录</b>
+          <span>页面顶部提示「内容仅自己可见」，点击「记录」即发布至私密信息流</span>
+        </div>
+        <div class="path-step">
+          <div class="path-step-num">STEP 06</div>
+          <b>自由编辑</b>
+          <span>点击「编辑」进入发布器，可修改 AI 文案、调整图片，保留用户自主度</span>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <div class="card-title">授权弹窗设计思路</div>
+        <p>本地小模型负责照片筛选与聚合，云端大模型负责文案生成。直接向用户解释「本地 vs 云端」认知成本极高。参考腾讯相册管家、百度网盘等竞品策略，弹窗只声明「数据不被储存」，具体分工放入超链接「查看详细条款」，实现<b>法律风险规避 × 用户体验友好</b>的平衡。</p>
+      </div>
+    </section>
+
+    <!-- 05 端云模型协同 -->
+    <section class="section" id="model">
+      <div class="section-label">
+        <div class="section-num">05</div>
+        <div>
+          <div class="section-title-text">端云 AI 模型协同设计</div>
+          <div class="section-sub">MODEL PIPELINE · 深度参与训练</div>
+        </div>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipe-node">
+          <div class="pipe-node-label">照片过滤</div>
+          <p>排除无拍摄时间/地点信息的图片；过滤劣质分类（隐私、证件、色情等）；排除质量分 &lt; 0.1 的图片</p>
+        </div>
+        <div class="pipe-node">
+          <div class="pipe-node-label">时间 × 地点聚合</div>
+          <p>同一 POI（地标级别）+ 8 小时内的照片归为一组，无 POI 则以 2km 范围聚合</p>
+        </div>
+        <div class="pipe-node">
+          <div class="pipe-node-label">本地精选</div>
+          <p>分类多样性 → 信息密度 → 质量分 → 去重相似，最少 1 张最多 9 张</p>
+        </div>
+        <div class="pipe-node">
+          <div class="pipe-node-label">云端生成</div>
+          <p>大模型根据精选照片内容生成结构化记录文案</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1.2rem">
+        <div class="card-title">为什么是 8 小时 / 地标级 POI？</div>
+        <p>测试 24h / 12h 会将早上在家、下午外出、晚上回家的照片错误聚为一组，生成语义混乱的卡片。调研发现用户单次外出活动时长大多在 8 小时内，以此为阈值可最大限度保证一组卡片代表<b>一个完整事件</b>。地标级 POI 颗粒度既保留地点故事感，又不会因精度过低造成卡片过多。</p>
+      </div>
+    </section>
+
+    <!-- 06 模型训练参与 -->
+    <section class="section" id="training">
+      <div class="section-label">
+        <div class="section-num">06</div>
+        <div>
+          <div class="section-title-text">模型训练深度参与</div>
+          <div class="section-sub">MODEL TRAINING · PRODUCT SIDE</div>
+        </div>
+      </div>
+
+      <div class="model-grid">
+
+        <div class="model-row">
+          <div class="model-row-label">分类标签模型<br/><span style="font-size:.7rem;opacity:.6;font-weight:400">正向 × 负向</span></div>
+          <div class="model-row-body">
+            <b>正向分类：</b>人物（单人 / 2-10人 / 人群）、植物、动物、自然风景、室外人造景观、室内场景、物品、美食<br/>
+            <b>负向过滤：</b>人物局部、卡片与证件、隐私信息与文件、色情血腥<br/>
+            <b>演变历程：</b>①「社交活动类」因难以标准化定义而删除，原子化并入人物/室内/室外；②人物细分为3个子类，避免模型错杀集体合照；③人造场景拆分为室外/室内，适配小模型识别能力；④食物/物品界线以「非透明包装覆盖」为准，避免数据污染；⑤裸露标准统一为「未遮住乳头即过滤」，回避性别判定难题
+          </div>
+        </div>
+
+        <div class="model-row">
+          <div class="model-row-label">质量分模型<br/><span style="font-size:.7rem;opacity:.6;font-weight:400">5维打分</span></div>
+          <div class="model-row-body">
+            <b>主体清晰度：</b>无清晰主体 → 多主体不突出 → 主体突出聚焦<br/>
+            <b>曝光层面：</b>严重过/欠曝 → 轻微偏差 → 曝光对比度准确<br/>
+            <b>清晰度：</b>严重噪点/运动模糊 → 局部噪点 → 高分辨率锐利<br/>
+            <b>色彩构成：</b>严重偏色/饱和异常 → 轻微偏色 → 色彩优秀白平衡恰当<br/>
+            <b>构图：</b>杂乱无章 → 有主题无构图 → 三分/中心/对称等明显构图意识
+          </div>
+        </div>
+
+        <div class="model-row">
+          <div class="model-row-label">相似度模型<br/><span style="font-size:.7rem;opacity:.6;font-weight:400">去重阈值</span></div>
+          <div class="model-row-body">
+            相似度阈值 <b>0.85</b>，超过则视为重复，仅保留质量分更高的一张。原始素材来自全族人生活相册与网络相册，覆盖所有分类，并包含大量同场景不同角度的成组照片，确保模型获得充分训练。
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- 尾部 -->
+    <section style="text-align:center;padding:1.5rem 0 .5rem">
+      <p style="color:var(--color-text-soft);font-size:.85rem;margin-bottom:1rem">感谢阅读完整案例 · 欢迎交流</p>
+      <a class="ui-button" href="index.html" style="margin:0 auto">← 返回主页</a>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

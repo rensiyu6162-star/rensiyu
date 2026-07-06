@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>数据费减免 - 百战营销平台</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;background:#f5f6fa;color:#333;padding:24px;}
+.page-title{font-size:20px;font-weight:600;color:#1a1a1a;margin-bottom:16px;}
+
+.toolbar-add{margin-bottom:12px;}
+.toolbar{display:flex;align-items:center;flex-wrap:wrap;margin-bottom:16px;row-gap:10px;column-gap:0;}
+.fi{display:inline-flex;align-items:center;width:300px;flex-shrink:0;padding-right:16px;}
+.fi .label{font-size:13px;color:#555;white-space:nowrap;flex-shrink:0;width:80px;text-align:right;padding-right:6px;}
+.fi .inp,.fi .sel-wrap{width:196px;flex-shrink:0;}
+.fi .sel-wrap{position:relative;}
+.fi .sel-wrap select{width:100%;}
+.fi-date{display:inline-flex;align-items:center;width:300px;flex-shrink:0;padding-right:16px;}
+.fi-date .label{font-size:13px;color:#555;white-space:nowrap;flex-shrink:0;width:80px;text-align:right;padding-right:6px;}
+.date-range{width:196px;flex-shrink:0;display:flex;align-items:center;height:32px;border:1px solid #d9d9d9;border-radius:4px;background:#fff;padding:0 8px;gap:4px;}
+.date-range:focus-within{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.08);}
+.date-range input[type=date]{border:none;outline:none;background:transparent;font-size:13px;color:#333;flex:1;min-width:0;height:100%;padding:0;}
+.date-range .sep{font-size:13px;color:#999;flex-shrink:0;}
+.toolbar-btns{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0;}
+
+.inp{height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 10px;font-size:13px;outline:none;color:#333;background:#fff;}
+.inp:focus{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.08);}
+.sel-wrap{position:relative;display:inline-block;}
+.sel-wrap select{height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 28px 0 10px;font-size:13px;outline:none;color:#333;background:#fff;appearance:none;cursor:pointer;}
+.sel-wrap select:focus{border-color:#1677ff;}
+.sel-wrap::after{content:"";position:absolute;right:10px;top:50%;transform:translateY(-50%);border:4px solid transparent;border-top:5px solid #999;pointer-events:none;}
+
+.btn{height:32px;padding:0 16px;border-radius:4px;border:1px solid transparent;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;white-space:nowrap;}
+.btn-primary{background:#1677ff;color:#fff;border-color:#1677ff;}
+.btn-primary:hover{background:#4096ff;}
+.btn-default{background:#fff;color:#333;border-color:#d9d9d9;}
+.btn-default:hover{color:#1677ff;border-color:#1677ff;}
+.btn-add{background:#1677ff;color:#fff;border-color:#1677ff;}
+.btn-add:hover{background:#4096ff;}
+
+.table-card{background:#fff;border-radius:6px;border:1px solid #e8e8e8;}
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{padding:12px 16px;text-align:left;color:#555;font-weight:500;background:#fafafa;white-space:nowrap;border-bottom:1px solid #f0f0f0;}
+td{padding:12px 16px;border-bottom:1px solid #f0f0f0;color:#333;white-space:nowrap;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#fafafa;}
+
+.status-tag{display:inline-block;padding:1px 8px;border-radius:2px;font-size:12px;}
+.status-on{background:#f6ffed;color:#52c41a;border:1px solid #b7eb8f;}
+.status-revoked{background:#f5f5f5;color:#999;border:1px solid #d9d9d9;}
+
+.op-link{color:#1677ff;cursor:pointer;font-size:13px;margin-right:8px;background:none;border:none;padding:0;}
+.op-link:hover{color:#4096ff;}
+.op-link:disabled{color:#ccc;cursor:not-allowed;}
+
+.pagination{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:14px 16px;border-top:1px solid #f0f0f0;font-size:13px;color:#555;}
+.pager{display:flex;align-items:center;gap:4px;}
+.pager-btn{min-width:28px;height:28px;padding:0 6px;border:1px solid #d9d9d9;border-radius:4px;background:#fff;cursor:pointer;font-size:13px;color:#333;display:flex;align-items:center;justify-content:center;}
+.pager-btn:hover{border-color:#1677ff;color:#1677ff;}
+.pager-btn.active{background:#1677ff;color:#fff;border-color:#1677ff;}
+
+.mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;}
+.mask.show{display:flex;}
+.modal{background:#fff;border-radius:8px;width:520px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 6px 32px rgba(0,0,0,.18);}
+.modal-hd{padding:16px 24px;font-size:16px;font-weight:600;color:#1a1a1a;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f0f0;}
+.modal-close{cursor:pointer;color:#999;font-size:20px;background:none;border:none;padding:0;}
+.modal-close:hover{color:#333;}
+.modal-bd{padding:24px;}
+.modal-ft{padding:12px 24px;border-top:1px solid #f0f0f0;display:flex;justify-content:flex-end;gap:8px;}
+.form-row{display:flex;align-items:flex-start;margin-bottom:18px;}
+.form-label{width:150px;padding-top:6px;font-size:13px;color:#555;flex-shrink:0;text-align:right;padding-right:12px;}
+.form-label .req{color:#ff4d4f;margin-right:2px;}
+.form-control{flex:1;}
+.form-control .inp{width:100%;}
+.form-control select{width:100%;height:32px;border:1px solid #d9d9d9;border-radius:4px;padding:0 10px;font-size:13px;outline:none;appearance:none;cursor:pointer;background:#fff;}
+.form-control select:focus{border-color:#1677ff;}
+.form-hint{font-size:12px;color:#999;margin-top:4px;}
+.form-warn{font-size:12px;color:#fa8c16;margin-top:4px;}
+.rule-tip{background:#fffbe6;border:1px solid #ffe58f;border-radius:4px;padding:10px 14px;font-size:12px;color:#7d5a00;margin-bottom:16px;line-height:1.8;}
+.rule-tip b{color:#d46b08;}
+</style>
+</head>
+<body>
+
+<div class="page-title">数据费减免</div>
+
+<div class="toolbar-add">
+  <button class="btn btn-add" onclick="openAddModal()">+ 新增</button>
+</div>
+
+<div class="toolbar">
+  <div class="fi-date">
+    <span class="label">减免日期：</span>
+    <div class="date-range">
+      <input type="date" value="2026-06-17"/>
+      <span class="sep">至</span>
+      <input type="date" value="2026-06-23"/>
+    </div>
+  </div>
+  <div class="fi">
+    <span class="label">客户名称：</span>
+    <input type="text" class="inp" placeholder="请输入"/>
+  </div>
+  <div class="fi">
+    <span class="label">减免类型：</span>
+    <div class="sel-wrap"><select><option value="">请选择</option><option>新策略3轮减免</option><option>重复营销减免</option></select></div>
+  </div>
+  <div class="fi">
+    <span class="label">状态：</span>
+    <div class="sel-wrap"><select><option value="">请选择</option><option>有效</option><option>已撤销</option></select></div>
+  </div>
+  <div class="toolbar-btns">
+    <button class="btn btn-primary">查询</button>
+    <button class="btn btn-default">重置</button>
+  </div>
+</div>
+
+<div class="table-card">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>减免日期</th><th>客户名称</th><th>策略ID (rule_tag)</th><th>营销方式</th>
+          <th>减免类型</th><th>减免条数</th><th>减免金额（元）</th><th>状态</th>
+          <th>操作人</th><th>操作时间</th><th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026-06-23</td><td>某客户A</td><td>rule_20240623_001</td><td>外呼</td><td>新策略3轮减免</td>
+          <td>85,000</td><td>850.00</td><td><span class="status-tag status-on">有效</span></td>
+          <td>张运营</td><td>2026-06-24 10:23:05</td>
+          <td><button class="op-link" onclick="confirmRevoke(this)">撤销</button></td>
+        </tr>
+        <tr>
+          <td>2026-06-22</td><td>某客户B</td><td>rule_20240622_008</td><td>短信/IP</td><td>新策略3轮减免</td>
+          <td>100,000</td><td>1,000.00</td><td><span class="status-tag status-on">有效</span></td>
+          <td>李运营</td><td>2026-06-23 09:15:30</td>
+          <td><button class="op-link" onclick="confirmRevoke(this)">撤销</button></td>
+        </tr>
+        <tr>
+          <td>2026-06-21</td><td>某客户C</td><td>rule_20240615_003</td><td>短信/IP</td><td>重复营销减免</td>
+          <td>42,000</td><td>0.00</td><td><span class="status-tag status-on">有效</span></td>
+          <td>张运营</td><td>2026-06-22 14:30:12</td>
+          <td><button class="op-link" onclick="confirmRevoke(this)">撤销</button></td>
+        </tr>
+        <tr style="opacity:.55;">
+          <td>2026-06-20</td><td>某客户A</td><td>rule_20240618_002</td><td>外呼</td><td>新策略3轮减免</td>
+          <td>60,000</td><td>600.00</td><td><span class="status-tag status-revoked">已撤销</span></td>
+          <td>李运营</td><td>2026-06-21 11:00:00</td>
+          <td><button class="op-link" disabled>撤销</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <div class="sel-wrap"><select style="height:28px;font-size:13px;min-width:90px;"><option>20 条/页</option><option>50 条/页</option></select></div>
+    <div class="pager">
+      <button class="pager-btn" disabled>‹</button>
+      <button class="pager-btn active">1</button>
+      <button class="pager-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- 新增弹窗 -->
+<div class="mask" id="addMask">
+  <div class="modal">
+    <div class="modal-hd">新增数据费减免<button class="modal-close" onclick="closeModal('addMask')">×</button></div>
+    <div class="modal-bd">
+      <div class="rule-tip">
+        <b>减免规则：</b><br/>
+        · 外呼/短信/IP 新策略：3轮减免，单日上限 <b>10万条</b>，数据费 = 0.01 × distinct[发送量]<br/>
+        · 短信/IP 重复营销：9天内第2、3次营销，数据费 = 0<br/>
+        · 提交后自动重算对应日期账单，<b>留痕不可删除</b>，如需取消请使用"撤销"
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>减免日期：</div>
+        <div class="form-control"><input type="date" class="inp" value="2026-06-23"/><div class="form-hint">仅支持单天，不可跨天</div></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>客户名称：</div>
+        <div class="form-control"><input type="text" class="inp" placeholder="请输入客户名称"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>策略ID (rule_tag)：</div>
+        <div class="form-control"><input type="text" class="inp" placeholder="请输入策略ID"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>营销方式：</div>
+        <div class="form-control"><select><option value="">请选择</option><option>外呼</option><option>短信/IP</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>减免类型：</div>
+        <div class="form-control"><select><option value="">请选择</option><option>新策略3轮减免</option><option>重复营销减免</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-label"><span class="req">*</span>减免条数：</div>
+        <div class="form-control">
+          <input type="number" class="inp" placeholder="请输入减免条数" min="1" id="discountCount" oninput="checkLimit()"/>
+          <div class="form-warn" id="limitWarn" style="display:none;">⚠ 单日最高上限10万条</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-label">备注：</div>
+        <div class="form-control"><input type="text" class="inp" placeholder="如：第N轮减免"/></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-default" onclick="closeModal('addMask')">取消</button>
+      <button class="btn btn-primary" onclick="submitAdd()">确定</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openAddModal(){document.getElementById('addMask').classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function checkLimit(){const v=parseInt(document.getElementById('discountCount').value,10);document.getElementById('limitWarn').style.display=(v>100000)?'block':'none';}
+function submitAdd(){alert('减免记录已提交，系统将自动重新计算对应日期的账单数据。');closeModal('addMask');}
+function confirmRevoke(btn){
+  if(confirm('确认撤销该减免记录？撤销后不可恢复，系统将重新计算对应日期账单。')){
+    const tr=btn.closest('tr');
+    tr.style.opacity='0.55';
+    tr.querySelector('.status-tag').className='status-tag status-revoked';
+    tr.querySelector('.status-tag').textContent='已撤销';
+    btn.disabled=true;btn.style.color='#ccc';btn.style.cursor='not-allowed';
+  }
+}
+document.querySelectorAll('.mask').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+</script>
+</body>
+</html>
